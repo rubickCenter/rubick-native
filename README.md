@@ -18,7 +18,7 @@
 5. mouseMove: 鼠标移动
 6. mouseScrollX: 鼠标滚轮左右滑动(正值向右,负值向左)
 7. mouseScrollY: 鼠标滚轮上下滑动(正值向下,负值向上)
-8. sendKeyboardSimulation: 键盘模拟输入
+8. sendKeyboardSimulation: 模拟键盘输入
 
 ##### 入参 eg
 
