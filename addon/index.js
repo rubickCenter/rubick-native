@@ -252,6 +252,11 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { onClipboardChange } = nativeBinding
+const { getClipboardContent, onInputEvent, sendKeyboardSimulation, MouseBtn, MouseAction, sendMouseSimulation } = nativeBinding
 
-module.exports.onClipboardChange = onClipboardChange
+module.exports.getClipboardContent = getClipboardContent
+module.exports.onInputEvent = onInputEvent
+module.exports.sendKeyboardSimulation = sendKeyboardSimulation
+module.exports.MouseBtn = MouseBtn
+module.exports.MouseAction = MouseAction
+module.exports.sendMouseSimulation = sendMouseSimulation

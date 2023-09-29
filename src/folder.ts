@@ -1,14 +1,8 @@
-export { activeWindow as getActiveWin, openWindows as getOpenWin } from "@miniben90/x-win"
-
-import initCB from "./src/cb"
 import { activeWindow } from "@miniben90/x-win"
 import { lstat } from "fs/promises"
 import { runAppleScript } from 'run-applescript'
 import { homedir } from "os"
 import { join } from "path"
-
-const cbHistoryDir = await initCB()
-console.log(cbHistoryDir);
 
 // 获取活动的文件夹路径
 export const getFolderOpenPath = async () => {
