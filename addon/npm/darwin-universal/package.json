@@ -1,0 +1,15 @@
+{
+  "name": "rubick-native-darwin-universal",
+  "version": "0.0.0",
+  "os": [
+    "darwin"
+  ],
+  "main": "rubick-native.darwin-universal.node",
+  "files": [
+    "rubick-native.darwin-universal.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  }
+}
