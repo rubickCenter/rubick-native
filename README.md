@@ -1,4 +1,4 @@
-## rubick rust addon
+## rubick addon
 
 ## API
 
