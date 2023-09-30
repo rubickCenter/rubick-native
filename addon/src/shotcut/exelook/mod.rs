@@ -188,6 +188,7 @@ fn _exelook(file_name: String) -> Result<ShorCutImg> {
 }
 
 #[napi]
+#[cfg(any(target_os = "windows"))]
 pub fn exe_look_base64(file_name: String) -> Option<String> {
   if let Ok(l) = _exelook(file_name) {
     Some("data:image/*;base64,".to_owned() + &general_purpose::STANDARD.encode(l.data))

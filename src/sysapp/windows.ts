@@ -4,7 +4,6 @@ import { fdir } from "fdir";
 import { parseLnkFallback, parseLnk } from "../../addon"
 import { Apps } from ".";
 
-export { exeLookBase64 } from "../../addon"
 export const shortcutWin = (extraPath: string[] = []) => ({
     [Symbol.asyncIterator]: async function* () {
         const hdir = homedir()
