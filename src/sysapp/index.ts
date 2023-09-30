@@ -1,7 +1,6 @@
 import { shortcutWin } from "./windows"
 import { platform } from "os"
-// exeLookBase64 仅限 windows 平台
-const { exeLookBase64 } = await import("../../addon")
+import { exeLookBase64 } from "../../addon"
 
 export interface Apps {
     name: string;
