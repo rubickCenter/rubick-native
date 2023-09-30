@@ -1,13 +1,13 @@
 import { activeWindow } from "@miniben90/x-win"
+import { execa } from "execa";
 import { lstat } from "fs/promises"
-import { runAppleScript } from 'run-applescript'
 import { homedir } from "os"
 import { join } from "path"
 
 // 获取活动的文件夹路径
 export const getFolderOpenPath = async () => {
     if (process.platform === 'darwin') {
-        return await runAppleScript(`
+        const res = await execa('osascript', ['-e', `
 			tell app "Finder"
 				try
 					POSIX path of (insertion location as alias)
@@ -15,7 +15,8 @@ export const getFolderOpenPath = async () => {
 					POSIX path of (path to desktop folder as alias)
 				end try
 			end tell
-		`);
+		`])
+        return res.stdout;
     }
 
     if (process.platform === 'win32') {
