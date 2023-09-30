@@ -8,7 +8,7 @@ permissions:
   id-token: write
 defaults:
   run:
-    working-directory: ${{ github.workspace }}/addon
+    working-directory: addon
 "on":
   push:
     branches:
