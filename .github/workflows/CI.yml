@@ -42,16 +42,15 @@ jobs:
             target: i686-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
+            # docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
             build: |-
-              PKG_CONFIG_SYSROOT_DIR=/
               set -e &&
               pnpm build --target x86_64-unknown-linux-gnu &&
               strip *.node
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
-            build: PKG_CONFIG_SYSROOT_DIR=/ && set -e && pnpm build && strip *.node
+            # docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
+            build: set -e && pnpm build && strip *.node
           - host: macos-latest
             target: aarch64-apple-darwin
             build: |
@@ -61,7 +60,6 @@ jobs:
             target: aarch64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
             build: |-
-              PKG_CONFIG_SYSROOT_DIR=/
               set -e &&
               pnpm build --target aarch64-unknown-linux-gnu &&
               aarch64-unknown-linux-gnu-strip *.node
@@ -71,14 +69,12 @@ jobs:
               sudo apt-get update
               sudo apt-get install gcc-arm-linux-gnueabihf -y
             build: |
-              PKG_CONFIG_SYSROOT_DIR=/
               pnpm build --target armv7-unknown-linux-gnueabihf
               arm-linux-gnueabihf-strip *.node
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
             build: |-
-              PKG_CONFIG_SYSROOT_DIR=/
               set -e &&
               rustup target add aarch64-unknown-linux-musl &&
               pnpm build --target aarch64-unknown-linux-musl &&
@@ -96,8 +92,6 @@ jobs:
         if: ${{ !matrix.settings.docker }}
         name: Install pnpm
         with:
-          node-version: 18
-          check-latest: true
           version: 8
           run_install: false
       # - name: Install compile dependencies
@@ -136,11 +130,8 @@ jobs:
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
-          node-version: 18
-          check-latest: true
           version: 8
           run_install: false
-          architecture: x86
       - name: Install dependencies
         run: pnpm install
       - name: Build in docker
@@ -170,8 +161,6 @@ jobs:
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
-          node-version: 18
-          check-latest: true
           version: 8
           run_install: false
       - name: Install dependencies
@@ -204,8 +193,6 @@ jobs:
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
-          node-version: 18
-          check-latest: true
           version: 8
           run_install: false
       - name: Install dependencies
