@@ -1,5 +1,5 @@
 {
-  "name": "rubick-native-linux-x64-musl",
+  "name": "rubick-native-addon-linux-x64-musl",
   "version": "0.0.0",
   "os": [
     "linux"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "rubick-native.linux-x64-musl.node",
+  "main": "rubick-native-addon.linux-x64-musl.node",
   "files": [
-    "rubick-native.linux-x64-musl.node"
+    "rubick-native-addon.linux-x64-musl.node"
   ],
   "license": "MIT",
   "engines": {

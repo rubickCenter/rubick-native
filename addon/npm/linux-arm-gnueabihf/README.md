@@ -1,3 +1,3 @@
-# `rubick-native-linux-arm-gnueabihf`
+# `rubick-native-addon-linux-arm-gnueabihf`
 
-This is the **armv7-unknown-linux-gnueabihf** binary for `rubick-native`
+This is the **armv7-unknown-linux-gnueabihf** binary for `rubick-native-addon`

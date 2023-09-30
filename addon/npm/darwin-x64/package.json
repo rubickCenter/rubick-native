@@ -1,5 +1,5 @@
 {
-  "name": "rubick-native-darwin-x64",
+  "name": "rubick-native-addon-darwin-x64",
   "version": "0.0.0",
   "os": [
     "darwin"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "rubick-native.darwin-x64.node",
+  "main": "rubick-native-addon.darwin-x64.node",
   "files": [
-    "rubick-native.darwin-x64.node"
+    "rubick-native-addon.darwin-x64.node"
   ],
   "license": "MIT",
   "engines": {

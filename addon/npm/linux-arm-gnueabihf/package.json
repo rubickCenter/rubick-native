@@ -1,5 +1,5 @@
 {
-  "name": "rubick-native-linux-arm-gnueabihf",
+  "name": "rubick-native-addon-linux-arm-gnueabihf",
   "version": "0.0.0",
   "os": [
     "linux"
@@ -7,9 +7,9 @@
   "cpu": [
     "arm"
   ],
-  "main": "rubick-native.linux-arm-gnueabihf.node",
+  "main": "rubick-native-addon.linux-arm-gnueabihf.node",
   "files": [
-    "rubick-native.linux-arm-gnueabihf.node"
+    "rubick-native-addon.linux-arm-gnueabihf.node"
   ],
   "license": "MIT",
   "engines": {

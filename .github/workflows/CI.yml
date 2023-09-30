@@ -1,7 +1,7 @@
 name: CI
 env:
   DEBUG: napi:*
-  APP_NAME: rubick-native
+  APP_NAME: rubick-native-addon
   MACOSX_DEPLOYMENT_TARGET: "10.13"
 permissions:
   contents: write

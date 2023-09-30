@@ -1,3 +1,3 @@
-# `rubick-native-darwin-universal`
+# `rubick-native-addon-darwin-universal`
 
-This is the **universal-apple-darwin** binary for `rubick-native`
+This is the **universal-apple-darwin** binary for `rubick-native-addon`

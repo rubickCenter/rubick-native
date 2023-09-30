@@ -1,5 +1,5 @@
 {
-  "name": "rubick-native-win32-ia32-msvc",
+  "name": "rubick-native-addon-win32-ia32-msvc",
   "version": "0.0.0",
   "os": [
     "win32"
@@ -7,9 +7,9 @@
   "cpu": [
     "ia32"
   ],
-  "main": "rubick-native.win32-ia32-msvc.node",
+  "main": "rubick-native-addon.win32-ia32-msvc.node",
   "files": [
-    "rubick-native.win32-ia32-msvc.node"
+    "rubick-native-addon.win32-ia32-msvc.node"
   ],
   "license": "MIT",
   "engines": {

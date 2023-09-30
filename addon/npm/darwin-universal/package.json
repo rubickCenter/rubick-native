@@ -1,12 +1,12 @@
 {
-  "name": "rubick-native-darwin-universal",
+  "name": "rubick-native-addon-darwin-universal",
   "version": "0.0.0",
   "os": [
     "darwin"
   ],
-  "main": "rubick-native.darwin-universal.node",
+  "main": "rubick-native-addon.darwin-universal.node",
   "files": [
-    "rubick-native.darwin-universal.node"
+    "rubick-native-addon.darwin-universal.node"
   ],
   "license": "MIT",
   "engines": {
