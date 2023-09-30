@@ -104,12 +104,12 @@ jobs:
           check-latest: true
           version: 8
           run_install: false
-      - name: Install
+      - name: Install compile dependencies
         if: ${{ matrix.settings.host == 'ubuntu-latest' }}
         run: |
           sudo apt-get update
-          sudo apt-get install pkgconf -y
-      - name: Install
+          sudo apt-get install pkg-config -y
+      - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
         with:
