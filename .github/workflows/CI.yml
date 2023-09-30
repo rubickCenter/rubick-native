@@ -72,16 +72,6 @@ jobs:
               pnpm build --target armv7-unknown-linux-gnueabihf
               arm-linux-gnueabihf-strip *.node
           - host: ubuntu-latest
-            target: aarch64-linux-android
-            build: |
-              pnpm build --target aarch64-linux-android
-              ${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip *.node
-          - host: ubuntu-latest
-            target: armv7-linux-androideabi
-            build: |
-              pnpm build --target armv7-linux-androideabi
-              ${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip *.node
-          - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
             build: |-
@@ -147,7 +137,7 @@ jobs:
         if: ${{ matrix.settings.docker }}
         with:
           image: ${{ matrix.settings.docker }}
-          options: "--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}:/build -w /build"
+          options: "--user 0:0 -v ${{ github.workspace }}/addon/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/addon/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/addon/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}/addon:/build -w /build"
           run: ${{ matrix.settings.build }}
       - name: Build
         run: ${{ matrix.settings.build }}
@@ -157,53 +147,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: ${{ env.APP_NAME }}.*.node
-          if-no-files-found: error
-  build-freebsd:
-    runs-on: macos-12
-    name: Build FreeBSD
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build
-        id: build
-        uses: vmactions/freebsd-vm@v0
-        env:
-          DEBUG: napi:*
-          RUSTUP_HOME: /usr/local/rustup
-          CARGO_HOME: /usr/local/cargo
-          RUSTUP_IO_THREADS: 1
-        with:
-          envs: DEBUG RUSTUP_HOME CARGO_HOME RUSTUP_IO_THREADS
-          usesh: true
-          mem: 3000
-          prepare: |
-            pkg install -y -f curl node libnghttp2 npm pnpm
-            curl https://sh.rustup.rs -sSf --output rustup.sh
-            sh rustup.sh -y --profile minimal --default-toolchain beta
-            export PATH="/usr/local/cargo/bin:$PATH"
-            echo "~~~~ rustc --version ~~~~"
-            rustc --version
-            echo "~~~~ node -v ~~~~"
-            node -v
-            echo "~~~~ pnpm --version ~~~~"
-            pnpm --version
-          run: |
-            export PATH="/usr/local/cargo/bin:$PATH"
-            pwd
-            ls -lah
-            whoami
-            env
-            freebsd-version
-            pnpm install
-            pnpm build
-            strip -x *.node
-            rm -rf node_modules
-            rm -rf target
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: bindings-freebsd
-          path: ${{ env.APP_NAME }}.*.node
+          path: addon/${{ env.APP_NAME }}.*.node
           if-no-files-found: error
   universal-macOS:
     name: Build universal macOS binary
@@ -237,13 +181,12 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: bindings-universal-apple-darwin
-          path: ${{ env.APP_NAME }}.*.node
+          path: addon/${{ env.APP_NAME }}.*.node
           if-no-files-found: error
   publish:
     name: Publish
     runs-on: ubuntu-latest
     needs:
-      - build-freebsd
       - universal-macOS
     steps:
       - uses: actions/checkout@v3
@@ -267,7 +210,7 @@ jobs:
         shell: bash
 # defaults:
 #   run:
-#     working-directory: ${{ github.workspace }}
+#     working-directory: ${{ github.workspace }}/addon
 
 # - name: Publish
 #   run: |

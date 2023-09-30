@@ -54,7 +54,9 @@ fn convert_btn(btn: Option<MouseBtn>) -> MouseButton {
     Some(MouseBtn::Left) => MouseButton::Left,
     Some(MouseBtn::Middle) => MouseButton::Middle,
     Some(MouseBtn::Right) => MouseButton::Right,
+    #[cfg(any(target_os = "windows", target_os = "linux"))]
     Some(MouseBtn::Back) => MouseButton::Back,
+    #[cfg(any(target_os = "windows", target_os = "linux"))]
     Some(MouseBtn::Forward) => MouseButton::Forward,
     None => panic!("未输入按钮"),
   }
