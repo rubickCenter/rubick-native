@@ -1,4 +1,6 @@
-## rubick addon
+## Rubick Addon
+
+封装常用跨平台能力
 
 ## API
 
@@ -74,27 +76,57 @@
 - type: 'file' | 'text'
 - content: Array<string> | string
 
-### 3. 获取系统已安装的 app
+### 3. 获取系统已安装的 app ✅(Mac/Linux 暂未支持)
 
 #### getSystemApp()
 
+获取系统安装的 APP 列表
+
 ##### 出参 eg
+
+异步迭代器
+
+```js
+let appNum = 0;
+for await (const app of getSystemApp()) {
+  console.log(app);
+  appNum++;
+}
+console.log("Total", appNum, "App installed.");
+```
+
+app:
 
 ```js
 [
   {
-    desc: "C://Download/wechat.exe",
-    type: "app",
-    icon: "base64",
-    name: "wechat",
+    name: "TIM",
+    description: null,
+    execPath: "C:\\Program Files (x86)\\Tencent\\TIM\\Bin\\QQScLauncher.exe",
+    shortCutPath:
+      "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk",
+    workingDir: "C:\\Program Files (x86)\\Tencent\\TIM\\Bin",
   },
 ];
 ```
 
-- desc: 应用的路径
-- type: 应用类型
-- icon: 64 \* 64 的应用 icon
 - name: 应用的名称
+- description: 应用详情
+- execPath: 应用的路径
+- shortCutPath: 应用快捷方式地址
+- workingDir: 应用工作目录
+
+#### getAppIcon()
+
+获取 APP 的图标
+
+##### 入参 eg
+
+- path: string windows 为 exe 文件地址;
+
+##### 出参 eg
+
+- img: string 图标的 base64 编码
 
 ### 4. 获取当前活跃窗口 ✅
 
@@ -120,7 +152,7 @@
 }
 ```
 
-### 5. 获取 `finder`(macos) 或者 `explorer`(win) 文件夹当前打开的路径 ✅
+### 5. 获取 `finder`(macos) 或者 `explorer`(win) 文件夹当前打开的路径 ✅(Linux 暂未支持)
 
 1. getFolderOpenPath
 

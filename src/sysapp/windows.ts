@@ -1,9 +1,10 @@
 import { join, parse } from "path";
 import { homedir } from "os"
 import { fdir } from "fdir";
-import { parseLnk3, parseLnk } from "../../addon"
+import { parseLnkFallback, parseLnk } from "../../addon"
+import { Apps } from ".";
 
-// todo lnk icon
+export { exeLookBase64 } from "../../addon"
 export const shortcutWin = (extraPath: string[] = []) => ({
     [Symbol.asyncIterator]: async function* () {
         const hdir = homedir()
@@ -19,37 +20,30 @@ export const shortcutWin = (extraPath: string[] = []) => ({
             const o = await f.crawl(p).withPromise()
             for (const t of o) {
                 const data = parseLnk(t)
-                const { name } = parse(t)
+                const { name, dir } = parse(t)
 
                 if (data) {
                     const d = JSON.parse(data)
-                    const path = join(t, d.relativePath ?? '')
                     yield ({
                         name,
-                        path,
                         description: d.name_string ?? null,
-                        working_dir: d.working_dir ?? null,
-                        // icon_location: d.icon_location ?? null
-                    })
+                        execPath: d.target_full_path,
+                        shortCutPath: t,
+                        workingDir: d.working_dir ?? null,
+                    }) as Apps
                 } else {
-                    const d = parseLnk3(t)
-                    const path = join(t, d.relativePath ?? '')
+                    const d = parseLnkFallback(t)
+                    const execPath = join(dir, d.relativePath ?? '')
+
                     yield ({
                         name,
-                        path,
                         description: d.nameString ?? null,
-                        working_dir: d.workingDir ?? null,
-                        // icon_location: d.iconLocation ?? null
-                    })
+                        execPath,
+                        shortCutPath: t,
+                        workingDir: d.workingDir ?? null,
+                    }) as Apps
                 }
             }
         }
     }
 })
-
-// let sss = 0
-// for await (const i of shortcutWin()) {
-//     console.log(i);
-//     sss++
-// }
-// console.log(sss);

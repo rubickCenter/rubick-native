@@ -16,6 +16,8 @@ napi-derive = "2.12.2"
 serde_json = "1.0.107"
 lnk_parser = "0.4.0"
 parselnk = "0.1.1"
+pelite = "0.10.0"
+base64 = "0.21.4"
 
 [build-dependencies]
 napi-build = "2.0.1"

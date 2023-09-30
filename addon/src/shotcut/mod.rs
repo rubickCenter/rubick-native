@@ -1,5 +1,6 @@
 use lnk_parser::LNKParser;
 use std::{fs::File, path::PathBuf};
+pub mod exelook;
 
 #[napi]
 pub fn parse_lnk(path: String) -> Option<String> {
@@ -28,7 +29,7 @@ fn convert(p: Option<PathBuf>) -> Option<String> {
 }
 
 #[napi]
-pub fn parse_lnk3(path: String) -> LnkData {
+pub fn parse_lnk_fallback(path: String) -> LnkData {
   let lnk_path = std::path::Path::new(&path);
   let lnk = parselnk::Lnk::try_from(lnk_path).unwrap();
 
