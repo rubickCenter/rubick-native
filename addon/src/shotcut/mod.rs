@@ -3,6 +3,7 @@ use std::{fs::File, path::PathBuf};
 pub mod exelook;
 
 #[napi]
+#[cfg(any(target_os = "windows"))]
 pub fn parse_lnk(path: String) -> Option<String> {
   let mut file = File::open(path).unwrap();
   let lnk_file = LNKParser::from_reader(&mut file);
@@ -29,6 +30,7 @@ fn convert(p: Option<PathBuf>) -> Option<String> {
 }
 
 #[napi]
+#[cfg(any(target_os = "windows"))]
 pub fn parse_lnk_fallback(path: String) -> LnkData {
   let lnk_path = std::path::Path::new(&path);
   let lnk = parselnk::Lnk::try_from(lnk_path).unwrap();

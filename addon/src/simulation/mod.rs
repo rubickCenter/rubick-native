@@ -9,18 +9,12 @@ pub fn send_keyboard_simulation(cmd: String) {
 
 #[napi]
 pub enum MouseBtn {
-  /// Left mouse button
   Left,
-  /// Middle mouse button
   Middle,
-  /// Right mouse button
   Right,
   #[cfg(any(target_os = "windows", target_os = "linux"))]
-  /// 4th mouse button. Typically performs the same function as Browser_Back
   Back,
   #[cfg(any(target_os = "windows", target_os = "linux"))]
-  /// 5th mouse button. Typically performs the same function as
-  /// Browser_Forward
   Forward,
 }
 
