@@ -108,7 +108,7 @@ jobs:
         if: ${{ matrix.settings.host == 'ubuntu-latest' }}
         run: |
           sudo apt-get update
-          sudo apt-get install build-essential gnome-core-devel pkg-config -y
+          sudo apt-get install build-essential libgtk-3-dev pkg-config -y
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
