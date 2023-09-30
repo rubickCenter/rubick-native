@@ -8,6 +8,7 @@ pub fn send_keyboard_simulation(cmd: String) {
 }
 
 #[napi]
+#[derive(Debug)]
 pub enum MouseBtn {
   Left,
   Middle,
@@ -41,18 +42,27 @@ pub struct Position {
   pub y: i32,
 }
 
-fn convert_btn(btn: Option<MouseBtn>) -> MouseButton {
+fn convert_btn(btn: Option<MouseBtn>) -> Option<MouseButton> {
   match btn {
-    Some(MouseBtn::Left) => MouseButton::Left,
-    Some(MouseBtn::Middle) => MouseButton::Middle,
-    Some(MouseBtn::Right) => MouseButton::Right,
-    Some(MouseBtn::Back) => MouseButton::Back,
-    Some(MouseBtn::Forward) => MouseButton::Forward,
-    None => panic!("未输入按钮"),
+    Some(MouseBtn::Left) => Some(MouseButton::Left),
+    Some(MouseBtn::Middle) => Some(MouseButton::Middle),
+    Some(MouseBtn::Right) => Some(MouseButton::Right),
+    #[cfg(any(target_os = "windows", target_os = "linux"))]
+    Some(MouseBtn::Back) => Some(MouseButton::Back),
+    #[cfg(any(target_os = "windows", target_os = "linux"))]
+    Some(MouseBtn::Forward) => Some(MouseButton::Forward),
+    #[allow(unreachable_patterns)]
+    Some(b) => {
+      println!("未识别按钮: {:#?}", b);
+      None
+    }
+    None => {
+      println!("未输入按钮");
+      None
+    }
   }
 }
 
-#[napi]
 pub fn send_mouse_simulation(input: MouseActionInput) -> Option<Position> {
   let mut enigo = Enigo::new();
 
@@ -85,20 +95,23 @@ pub fn send_mouse_simulation(input: MouseActionInput) -> Option<Position> {
       let (x, y) = enigo.mouse_location();
       Some(Position { x, y })
     }
-    MouseAction::Up => {
-      enigo.mouse_up(convert_btn(input.button));
+    MouseAction::Down => {
+      if let Some(b) = convert_btn(input.button) {
+        enigo.mouse_down(b);
+      }
       None
     }
-    MouseAction::Down => {
-      enigo.mouse_down(convert_btn(input.button));
+    MouseAction::Up => {
+      if let Some(b) = convert_btn(input.button) {
+        enigo.mouse_up(b);
+      }
       None
     }
     MouseAction::Click => {
-      enigo.mouse_click(convert_btn(input.button));
+      if let Some(b) = convert_btn(input.button) {
+        enigo.mouse_click(b);
+      }
       None
     }
   }
 }
-
-// #[napi(ts_args_type = "callback: (content: any) => void")]
-// pub fn on_input_event(callback: JsFunction) {}
