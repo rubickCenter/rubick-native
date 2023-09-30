@@ -133,7 +133,6 @@ jobs:
         run: pnpm config set supportedArchitectures.cpu "ia32"
         shell: bash
       - uses: pnpm/action-setup@v2
-        if: matrix.settings.target == 'i686-pc-windows-msvc'
         name: Install pnpm
         with:
           node-version: 18
