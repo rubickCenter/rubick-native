@@ -5,10 +5,10 @@
 //     console.log(event);
 // })
 
-import { shortcutWin } from "./src/sysapp/windows"
+import * as addon from "./src"
 
-// console.log(shortcutWin());
-for await (const i of shortcutWin()) {
-    console.log(i);
-    // sss++
-}
+console.log(addon);
+// for await (const i of shortcutWin()) {
+//     console.log(i);
+//     // sss++
+// }

@@ -39,7 +39,7 @@
 
 - callback: function 监听输入事件的函数
 
-##### 出参 eg
+##### event object eg
 
 ```json
 {
@@ -95,19 +95,16 @@ for await (const app of getSystemApp()) {
 console.log("Total", appNum, "App installed.");
 ```
 
-app:
+app object:
 
-```js
-[
-  {
-    name: "TIM",
-    description: null,
-    execPath: "C:\\Program Files (x86)\\Tencent\\TIM\\Bin\\QQScLauncher.exe",
-    shortCutPath:
-      "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk",
-    workingDir: "C:\\Program Files (x86)\\Tencent\\TIM\\Bin",
-  },
-];
+```json
+{
+  "name": "TIM",
+  "description": null,
+  "execPath": "C:\\Program Files (x86)\\Tencent\\TIM\\Bin\\QQScLauncher.exe",
+  "shortCutPath": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk",
+  "workingDir": "C:\\Program Files (x86)\\Tencent\\TIM\\Bin"
+}
 ```
 
 - name: 应用的名称
@@ -122,7 +119,7 @@ app:
 
 ##### 入参 eg
 
-- path: string windows 为 exe 文件地址;
+- path: string windows 平台下填写 exe 文件地址;
 
 ##### 出参 eg
 
