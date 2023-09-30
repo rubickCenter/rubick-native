@@ -132,8 +132,6 @@ jobs:
         if: matrix.settings.target == 'i686-pc-windows-msvc'
         run: pnpm config set supportedArchitectures.cpu "ia32"
         shell: bash
-      - name: Install dependencies
-        run: pnpm install
       - uses: pnpm/action-setup@v2
         if: matrix.settings.target == 'i686-pc-windows-msvc'
         name: Install pnpm
@@ -143,6 +141,8 @@ jobs:
           version: 8
           run_install: false
           architecture: x86
+      - name: Install dependencies
+        run: pnpm install
       - name: Build in docker
         uses: addnab/docker-run-action@v3
         if: ${{ matrix.settings.docker }}
