@@ -93,7 +93,7 @@
 
 ##### 入参 eg
 
-- extraPath: 额外需要检索应用的文件夹
+- extraPath: string 额外需要检索的文件夹
 
 ##### 出参 eg
 
