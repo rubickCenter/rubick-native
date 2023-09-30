@@ -108,8 +108,7 @@ jobs:
         if: ${{ matrix.settings.host == 'ubuntu-latest' }}
         run: |
           sudo apt-get update
-          sudo apt-get install xbps -y
-          sudo xbps-install pkg-config libglib-devel cairo-devel pango-devel atk-devel gdk-pixbuf-devel gtk+3-devel
+          sudo apt-get install build-essential gnome-core-devel pkg-config -y
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
