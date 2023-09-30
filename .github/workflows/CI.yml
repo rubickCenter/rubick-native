@@ -105,6 +105,11 @@ jobs:
           version: 8
           run_install: false
       - name: Install
+        if: ${{ matrix.settings.host == 'ubuntu-latest' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install pkgconf -y
+      - name: Install
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
         with:
