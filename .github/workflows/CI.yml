@@ -143,6 +143,9 @@ jobs:
           run_install: false
       - name: Install dependencies
         run: pnpm install
+      - name: List Deps
+        run: ls -R /usr/lib/
+        shell: bash
       - name: Build
         run: ${{ matrix.settings.build }}
         if: ${{ !matrix.settings.docker }}
