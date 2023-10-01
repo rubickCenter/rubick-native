@@ -217,9 +217,8 @@ jobs:
       - name: Build & Publish
         run: |
           # npm config set provenance true
-          pnpm prepublishOnly
-          npm publish --tag next --access public
+          pnpm publish --access public
           cd ..
           pnpm i
           pnpm build
-          npm publish --tag next --access public
+          pnpm publish --access public
