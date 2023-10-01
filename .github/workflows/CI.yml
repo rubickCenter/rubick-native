@@ -136,7 +136,7 @@ jobs:
             ~/.cargo/git/db/
             addon/.cargo-cache
             addon/target/
-          key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
+          key: ${{ matrix.settings.target }}-cargo-ubuntu-latest
       - uses: goto-bus-stop/setup-zig@v2
       - name: Build
         shell: alpine.sh --root {0}
