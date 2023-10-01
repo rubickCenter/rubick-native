@@ -111,7 +111,7 @@ jobs:
           version: 8
           run_install: false
       - name: Set up Rust
-        uses: actions/setup-rust@v2
+        uses: ructions/toolchain@v2
         with:
           rust-version: nightly
           targets: ${{ matrix.settings.target }}
