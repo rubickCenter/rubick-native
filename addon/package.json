@@ -7,7 +7,6 @@
     "name": "rubick-native-addon",
     "triples": {
       "additional": [
-        "armv7-unknown-linux-gnueabihf",
         "aarch64-unknown-linux-gnu",
         "aarch64-unknown-linux-musl",
         "x86_64-unknown-linux-musl",

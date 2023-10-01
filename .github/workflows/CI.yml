@@ -118,8 +118,6 @@ jobs:
             arch: aarch64
           - target: aarch64-unknown-linux-musl
             arch: aarch64
-          - target: armv7-unknown-linux-gnueabihf
-            arch: armv7
     name: stable - ${{ matrix.settings.target }} - node@18
     runs-on: ubuntu-latest
     steps:
@@ -127,19 +125,6 @@ jobs:
       - uses: jirutka/setup-alpine@v1
         with:
           arch: ${{ matrix.settings.arch }}
-          packages: >
-            libuuid
-            xdo 
-            libc-dev 
-            pkgconfig 
-            glib-dev 
-            gtk+3.0-dev 
-            pango-dev 
-            cairo-dev 
-            fontconfig-dev
-            rustup
-            nodejs
-            npm
       - name: Cache cargo
         uses: actions/cache@v3
         with:
@@ -151,13 +136,13 @@ jobs:
             addon/target/
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
       - uses: goto-bus-stop/setup-zig@v2
-      - name: Install dependencies
-        shell: alpine.sh --root {0}
-        run: npm install
       - name: Build
-        shell: alpine.sh --root {0}
+        shell: alpine.sh {0}
         run: |-
           set -e &&
+          apk update && 
+          apk add libuuid xdo libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev rustup nodejs npm &&
+          npm install &&
           rustup target add ${{ matrix.settings.target }} &&
           PKG_CONFIG_SYSROOT_DIR=/ npm run build --target ${{ matrix.settings.target }} &&
           strip *.node
