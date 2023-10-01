@@ -1,6 +1,6 @@
 {
   "name": "rubick-native-addon",
-  "version": "0.0.2",
+  "version": "0.0.3-beta",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
@@ -30,5 +30,9 @@
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.16.3"
-  }
+  },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ]
 }

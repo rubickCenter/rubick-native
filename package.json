@@ -5,10 +5,12 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -d"
+    "build": "tsc -d",
+    "postinstall": "cd addon && npm install --production"
   },
   "devDependencies": {
     "@types/node": "^20.7.1",
+    "picomatch": "^2.3.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
@@ -22,7 +24,6 @@
     "dist/",
     "addon/package.json",
     "addon/index.js",
-    "addon/index.d.ts",
-    "addon/*.node"
+    "addon/index.d.ts"
   ]
 }
