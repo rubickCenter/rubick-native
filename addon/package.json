@@ -1,6 +1,6 @@
 {
   "name": "rubick-native-addon",
-  "version": "0.0.1",
+  "version": "0.0.2-beta",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
