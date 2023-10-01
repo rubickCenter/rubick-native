@@ -44,7 +44,7 @@ jobs:
             target: x86_64-unknown-linux-gnu
             build: |-
               sudo apt-get update &&
-              sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev gcc-arm-linux-gnueabihf libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
+              sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
               set -e &&
               PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target x86_64-unknown-linux-gnu &&
               strip *.node
@@ -52,7 +52,7 @@ jobs:
             target: x86_64-unknown-linux-musl
             build: |-
               sudo apt-get update &&
-              sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev gcc-arm-linux-gnueabihf libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
+              sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
               set -e &&
               PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target x86_64-unknown-linux-musl &&
               strip *.node
@@ -63,28 +63,28 @@ jobs:
               strip -x *.node
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
-            arm: raspios_lite_arm64:latest
+            arch: aarch64
             build: |-
-              sudo apt-get update &&
-              sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev gcc-arm-linux-gnueabihf libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
+              apk update &&
+              apk install libuuid xdo libc-dev pkg-config glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev -y &&
               set -e &&
               PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target aarch64-unknown-linux-gnu &&
               strip *.node
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
-            arm: raspios_lite_arm64:latest
+            arch: aarch64
             build: |-
-              sudo apt-get update &&
-              sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev gcc-arm-linux-gnueabihf libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
+              apk update &&
+              apk install libuuid xdo libc-dev pkg-config glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev -y &&
               set -e &&
               PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target aarch64-unknown-linux-musl &&
               strip *.node
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
-            arm: dietpi:rpi_armv7_bullseye
+            arch: armv7
             build: |-
-              sudo apt-get update &&
-              sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev gcc-arm-linux-gnueabihf libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
+              apk update &&
+              apk install libuuid xdo libc-dev pkg-config glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev -y &&
               set -e &&
               PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target armv7-unknown-linux-gnueabihf &&
               strip *.node
@@ -95,10 +95,10 @@ jobs:
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v3
-      - uses: pguyot/arm-runner-action@v2
-        if: ${{ matrix.settings.arm }}
+      - uses: jirutka/setup-alpine@v1
+        if: ${{ matrix.settings.arch }}
         with:
-          base_image: ${{ matrix.settings.arm }}
+          arch: ${{ matrix.settings.arch }}
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
