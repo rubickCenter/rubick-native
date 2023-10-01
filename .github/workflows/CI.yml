@@ -137,7 +137,7 @@ jobs:
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
       - uses: goto-bus-stop/setup-zig@v2
       - name: Build
-        shell: alpine.sh {0}
+        shell: alpine.sh --root {0}
         run: |-
           set -e &&
           apk update && 
