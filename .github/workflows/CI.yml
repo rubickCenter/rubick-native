@@ -118,8 +118,6 @@ jobs:
             arch: aarch64
           - target: aarch64-unknown-linux-musl
             arch: aarch64
-          - target: armv7-unknown-linux-gnueabihf
-            arch: armv7
     name: stable - ${{ matrix.settings.target }} - node@18
     runs-on: ubuntu-latest
     steps:
