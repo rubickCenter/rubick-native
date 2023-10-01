@@ -139,6 +139,7 @@ jobs:
             fontconfig-dev
             rustup
             nodejs
+            npm
       - name: Cache cargo
         uses: actions/cache@v3
         with:
