@@ -142,7 +142,7 @@ jobs:
           set -e &&
           apk update && 
           apk add curl gcc libuuid xdo libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev nodejs npm &&
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -y &&
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -- -y &&
           source $HOME/.cargo/env &&
           rustup target add ${{ matrix.settings.target }} &&
           npm install &&
