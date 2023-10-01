@@ -1,6 +1,6 @@
 {
   "name": "rubick-native",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "type": "module",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
