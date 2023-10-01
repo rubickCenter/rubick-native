@@ -116,22 +116,10 @@ jobs:
         settings:
           - target: aarch64-unknown-linux-gnu
             arch: aarch64
-            build: |-
-              set -e &&
-              PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target aarch64-unknown-linux-gnu &&
-              strip *.node
           - target: aarch64-unknown-linux-musl
             arch: aarch64
-            build: |-
-              set -e &&
-              PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target aarch64-unknown-linux-musl &&
-              strip *.node
           - target: armv7-unknown-linux-gnueabihf
             arch: armv7
-            build: |-
-              set -e &&
-              PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target armv7-unknown-linux-gnueabihf &&
-              strip *.node
     name: stable - ${{ matrix.settings.target }} - node@18
     runs-on: ubuntu-latest
     steps:
@@ -149,18 +137,8 @@ jobs:
             pango-dev 
             cairo-dev 
             fontconfig-dev
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
-      - name: Set up Rust
-        uses: ructions/toolchain@v2
-        shell: alpine.sh {0}
-        with:
-          toolchain: nightly
-          override: true
-          target: ${{ matrix.settings.target }}
+            rustup
+            pnpm
       - name: Cache cargo
         uses: actions/cache@v3
         with:
@@ -177,7 +155,11 @@ jobs:
         run: pnpm install
       - name: Build
         shell: alpine.sh {0}
-        run: ${{ matrix.settings.build }}
+        run: |-
+          set -e &&
+          rustup target add ${{ matrix.settings.target }} &&
+          PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target ${{ matrix.settings.target }} &&
+          strip *.node
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
