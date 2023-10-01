@@ -142,6 +142,7 @@ jobs:
           set -e &&
           apk update && 
           apk add libuuid xdo libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev rustup nodejs npm &&
+          export PATH="$HOME/.cargo/bin:$PATH" &&
           npm install &&
           rustup target add ${{ matrix.settings.target }} &&
           PKG_CONFIG_SYSROOT_DIR=/ npm run build --target ${{ matrix.settings.target }} &&
