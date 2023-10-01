@@ -139,16 +139,16 @@ jobs:
       - uses: jirutka/setup-alpine@v1
         with:
           arch: ${{ matrix.settings.arch }}
-        packages: >
-          libuuid
-          xdo 
-          libc-dev 
-          pkg-config 
-          glib-dev 
-          gtk+3.0-dev 
-          pango-dev 
-          cairo-dev 
-          fontconfig-dev
+          packages: >
+            libuuid
+            xdo 
+            libc-dev 
+            pkg-config 
+            glib-dev 
+            gtk+3.0-dev 
+            pango-dev 
+            cairo-dev 
+            fontconfig-dev
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         shell: alpine.sh {0}
