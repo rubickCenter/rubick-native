@@ -138,7 +138,7 @@ jobs:
             cairo-dev 
             fontconfig-dev
             rustup
-            pnpm
+            nodejs
       - name: Cache cargo
         uses: actions/cache@v3
         with:
@@ -152,13 +152,13 @@ jobs:
       - uses: goto-bus-stop/setup-zig@v2
       - name: Install dependencies
         shell: alpine.sh {0}
-        run: pnpm install
+        run: npm install
       - name: Build
         shell: alpine.sh {0}
         run: |-
           set -e &&
           rustup target add ${{ matrix.settings.target }} &&
-          PKG_CONFIG_SYSROOT_DIR=/ pnpm build --target ${{ matrix.settings.target }} &&
+          PKG_CONFIG_SYSROOT_DIR=/ npm run build --target ${{ matrix.settings.target }} &&
           strip *.node
       - name: Upload artifact
         uses: actions/upload-artifact@v3
@@ -200,7 +200,7 @@ jobs:
           if-no-files-found: error
   publish:
     name: Publish
-    runs-on: ubuntu-22
+    runs-on: ubuntu-latest
     needs:
       - universal-macOS
       - build-arm
