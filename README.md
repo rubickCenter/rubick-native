@@ -2,7 +2,8 @@
 
 封装常用跨平台能力
 
-```
+```js
+// 安装
 pnpm add rubick-native
 ```
 
