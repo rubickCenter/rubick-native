@@ -145,7 +145,7 @@ jobs:
         run: pnpm install
       - name: List Deps
         run: ls -R /usr/lib/
-        if: matrix.settings.target == 'ubuntu-latest'
+        if: matrix.settings.host == 'ubuntu-latest'
         shell: bash
       - name: Build
         run: ${{ matrix.settings.build }}
