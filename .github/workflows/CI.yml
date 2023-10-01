@@ -217,7 +217,6 @@ jobs:
       - name: Build & Publish
         run: |
           # npm config set provenance true
-          pnpm build
           pnpm publish --access public
           cd ..
           pnpm i
