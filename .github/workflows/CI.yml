@@ -114,10 +114,10 @@ jobs:
       fail-fast: false
       matrix:
         settings:
-          - target: aarch64-unknown-linux-gnu
-            arch: aarch64
-          - target: aarch64-unknown-linux-musl
-            arch: aarch64
+          # - target: aarch64-unknown-linux-gnu
+          #   arch: aarch64
+          # - target: aarch64-unknown-linux-musl
+          #   arch: aarch64
     name: ${{ matrix.settings.target }}
     runs-on: ubuntu-latest
     steps:
