@@ -109,51 +109,51 @@ jobs:
           name: bindings-${{ matrix.settings.target }}
           path: addon/${{ env.APP_NAME }}.*.node
           if-no-files-found: error
-  build-arm:
-    strategy:
-      fail-fast: false
-      matrix:
-        settings:
-          # - target: aarch64-unknown-linux-gnu
-          #   arch: aarch64
-          # - target: aarch64-unknown-linux-musl
-          #   arch: aarch64
-    name: ${{ matrix.settings.target }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: jirutka/setup-alpine@v1
-        with:
-          arch: ${{ matrix.settings.arch }}
-      - name: Cache cargo
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            addon/.cargo-cache
-            addon/target/
-          key: ${{ matrix.settings.target }}-cargo-ubuntu-latest
-      - uses: goto-bus-stop/setup-zig@v2
-      - name: Build
-        shell: alpine.sh --root {0}
-        run: |-
-          set -e &&
-          apk update && 
-          apk add curl gcc libuuid xdo xdotool-dev libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev nodejs npm &&
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
-          source $HOME/.cargo/env &&
-          rustup target add ${{ matrix.settings.target }} &&
-          npm install &&
-          PKG_CONFIG_SYSROOT_DIR=/ npm run build --target ${{ matrix.settings.target }} &&
-          strip ${{ matrix.settings.target }}/*.node
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: bindings-${{ matrix.settings.target }}
-          path: addon/${{ matrix.settings.target }}/${{ env.APP_NAME }}.*.node
-          if-no-files-found: error
+  # build-arm:
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       settings:
+  #         - target: aarch64-unknown-linux-gnu
+  #           arch: aarch64
+  #         - target: aarch64-unknown-linux-musl
+  #           arch: aarch64
+  #   name: ${{ matrix.settings.target }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: jirutka/setup-alpine@v1
+  #       with:
+  #         arch: ${{ matrix.settings.arch }}
+  #     - name: Cache cargo
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: |
+  #           ~/.cargo/registry/index/
+  #           ~/.cargo/registry/cache/
+  #           ~/.cargo/git/db/
+  #           addon/.cargo-cache
+  #           addon/target/
+  #         key: ${{ matrix.settings.target }}-cargo-ubuntu-latest
+  #     - uses: goto-bus-stop/setup-zig@v2
+  #     - name: Build
+  #       shell: alpine.sh --root {0}
+  #       run: |-
+  #         set -e &&
+  #         apk update &&
+  #         apk add curl gcc libuuid xdo xdotool-dev libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev nodejs npm &&
+  #         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
+  #         source $HOME/.cargo/env &&
+  #         rustup target add ${{ matrix.settings.target }} &&
+  #         npm install &&
+  #         PKG_CONFIG_SYSROOT_DIR=/ npm run build --target ${{ matrix.settings.target }} &&
+  #         strip ${{ matrix.settings.target }}/*.node
+  #     - name: Upload artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: bindings-${{ matrix.settings.target }}
+  #         path: addon/${{ matrix.settings.target }}/${{ env.APP_NAME }}.*.node
+  #         if-no-files-found: error
   universal-macOS:
     name: Build universal macOS binary
     needs:
@@ -191,7 +191,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - universal-macOS
-      - build-arm
+      # - build-arm
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
