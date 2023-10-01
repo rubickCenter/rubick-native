@@ -97,7 +97,8 @@ jobs:
       - name: Set up QEMU
         if: ${{ matrix.settings.qemu }}
         uses: docker/setup-qemu-action@v3
-        platforms: ${{ matrix.settings.qemu }}
+        with:
+          platforms: ${{ matrix.settings.qemu }}
       - uses: pnpm/action-setup@v2
         if: ${{ !matrix.settings.docker }}
         name: Install pnpm
