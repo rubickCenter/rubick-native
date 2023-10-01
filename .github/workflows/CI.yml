@@ -143,7 +143,7 @@ jobs:
         run: |-
           set -e &&
           apk update && 
-          apk add curl gcc libuuid xdo libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev nodejs npm &&
+          apk add lxd curl gcc libuuid xdo libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev nodejs npm &&
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
           source $HOME/.cargo/env &&
           rustup target add ${{ matrix.settings.target }} &&
@@ -174,12 +174,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: bindings-x86_64-apple-darwin
-          path: artifacts
+          path: addon/artifacts
       - name: Download macOS arm64 artifact
         uses: actions/download-artifact@v3
         with:
           name: bindings-aarch64-apple-darwin
-          path: artifacts
+          path: addon/artifacts
       - name: Combine binaries
         run: pnpm universal
       - name: Upload artifact
@@ -206,26 +206,32 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v3
         with:
-          path: artifacts
+          path: addon/artifacts
       - name: Move artifacts
         run: pnpm artifacts
       - name: List packages
         run: ls -R ./npm
         shell: bash
-# - name: Publish
-#   run: |
-#     npm config set provenance true
-#     if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$";
-#     then
-#       echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-#       npm publish --access public
-#     elif git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+";
-#     then
-#       echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-#       npm publish --tag next --access public
-#     else
-#       echo "Not a release, skipping publish"
-#     fi
-#   env:
-#     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build
+        run: |
+          pnpm prepublishOnly
+          cd ..
+          pnpm build
+
+      # - name: Publish
+      #   run: |
+      #     npm config set provenance true
+      #     if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$";
+      #     then
+      #       echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      #       npm publish --access public
+      #     elif git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+";
+      #     then
+      #       echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      #       npm publish --tag next --access public
+      #     else
+      #       echo "Not a release, skipping publish"
+      #     fi
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

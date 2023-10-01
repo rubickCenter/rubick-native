@@ -63,6 +63,7 @@ fn convert_btn(btn: Option<MouseBtn>) -> Option<MouseButton> {
   }
 }
 
+#[napi]
 pub fn send_mouse_simulation(input: MouseActionInput) -> Option<Position> {
   let mut enigo = Enigo::new();
 

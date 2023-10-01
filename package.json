@@ -1,14 +1,32 @@
 {
   "name": "rubick-native",
   "version": "0.0.0",
-  "scripts": {},
+  "scripts": {
+    "build": "tsup"
+  },
   "type": "module",
   "devDependencies": {
-    "@types/node": "^20.7.1"
+    "@types/node": "^20.7.1",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@miniben90/x-win": "^1.3.1",
     "execa": "^8.0.1",
     "fdir": "^6.1.0"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "target": "es5",
+    "splitting": true,
+    "treeshake": true,
+    "clean": true,
+    "dts": true
   }
 }
