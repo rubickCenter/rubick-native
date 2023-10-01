@@ -3,5 +3,5 @@
 # rustflags = ["-C", "target-feature=-crt-static"]
 
 [target.'cfg(target_os = "linux")']
-rustflags = ["-C", "link-arg=-nostartfiles"]
+rustflags = ["-C", "link-arg=-nostartfiles","target-feature=-crt-static"]
  
