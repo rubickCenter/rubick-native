@@ -221,4 +221,4 @@ jobs:
           cd ..
           pnpm i
           pnpm build
-          pnpm publish --access public
+          pnpm publish --access public --no-git-checks
