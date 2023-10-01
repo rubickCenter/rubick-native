@@ -5,7 +5,7 @@
 //     console.log(event);
 // })
 
-import * as addon from "./src"
+import * as addon from "./dist"
 
 console.log(addon);
 // for await (const i of shortcutWin()) {

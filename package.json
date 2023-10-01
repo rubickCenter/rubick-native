@@ -1,13 +1,14 @@
 {
   "name": "rubick-native",
   "version": "0.0.0",
-  "scripts": {
-    "build": "tsup"
-  },
   "type": "module",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -d"
+  },
   "devDependencies": {
     "@types/node": "^20.7.1",
-    "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
@@ -15,18 +16,13 @@
     "execa": "^8.0.1",
     "fdir": "^6.1.0"
   },
-  "tsup": {
-    "entry": [
-      "src/index.ts"
-    ],
-    "format": [
-      "esm",
-      "cjs"
-    ],
-    "target": "es5",
-    "splitting": true,
-    "treeshake": true,
-    "clean": true,
-    "dts": true
-  }
+  "files": [
+    "README.md",
+    "LICENSE",
+    "dist/",
+    "addon/package.json",
+    "addon/index.js",
+    "addon/index.d.ts",
+    "addon/*.node"
+  ]
 }

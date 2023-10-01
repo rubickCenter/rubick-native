@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "outDir": "dist",
         "esModuleInterop": true,
         "module": "ESNext",
         "moduleResolution": "Node",
@@ -8,5 +9,8 @@
             "ESNext",
             "DOM"
         ]
-    }
+    },
+    "include": [
+        "./src/**/*"
+    ]
 }
