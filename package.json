@@ -1,12 +1,12 @@
 {
   "name": "rubick-native",
-  "version": "0.0.0",
+  "version": "0.0.1-beta",
   "type": "module",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -d",
-    "postinstall": "cd addon && npm install --production"
+    "postinstall": "cd addon && npm install --only=prod"
   },
   "devDependencies": {
     "@types/node": "^20.7.1",
