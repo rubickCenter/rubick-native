@@ -1,6 +1,10 @@
-# Rubick Addon
+# Rubick Native
 
 封装常用跨平台能力
+
+```
+pnpm add rubick-native
+```
 
 ## 贡献
 
