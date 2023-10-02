@@ -1,11 +1,7 @@
-import { grabInputEvent } from "./addon"
+import { grabInputEvent } from "./src"
 
 grabInputEvent((event) => {
-    const e = JSON.parse(event)?.event_type
-    if (e?.ButtonRelease === "Right") {
-        return false
-    }
-    console.log(e);
+    console.log(event);
     return true
 })
 

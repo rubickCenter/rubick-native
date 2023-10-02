@@ -46,7 +46,7 @@ pnpm add rubick-native
 ##### 入参 eg
 
 ```js
-(event: object) => void;
+(event: MouseKeyBoardEvent) => void;
 ```
 
 - callback: function 监听输入事件的函数
@@ -68,7 +68,7 @@ pnpm add rubick-native
 ##### 入参 eg
 
 ```js
-(event: object) => boolean;
+(event: MouseKeyBoardEvent) => boolean;
 ```
 
 - callback: function 监听输入事件的函数, 返回是否将事件发送给系统
