@@ -61,7 +61,7 @@ pnpm add rubick-native
 }
 ```
 
-10. grapInputEvent 键鼠事件监听&拦截
+10. grabInputEvent 键鼠事件监听&拦截
 
 比 onInputEvent 多了拦截键鼠事件的功能，但是在 MacOS 下需要被授予 Accessibility 权限此 API 才能工作，故无拦截需求建议使用 onInputEvent
 
