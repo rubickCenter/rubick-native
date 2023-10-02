@@ -104,7 +104,15 @@ export type EventKeyType = "Alt" |
     "Kp8" |
     "Kp9" |
     "KpDelete" |
-    "Function"
+    "Function" | {
+        Unknown: number
+    }
+
+export type EventBtnType = "Left" |
+    "Right" |
+    "Middle" | {
+        Unknown: number
+    }
 
 export interface MouseKeyBoardEventOther {
     time: {
@@ -115,9 +123,9 @@ export interface MouseKeyBoardEventOther {
     event_type: {
         "KeyRelease": EventKeyType
     } | {
-        "ButtonPress": EventKeyType
+        "ButtonPress": EventBtnType
     } | {
-        "ButtonRelease": EventKeyType
+        "ButtonRelease": EventBtnType
     } | {
         "MouseMove": { x: number, y: number }
     } | {
