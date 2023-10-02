@@ -1,6 +1,6 @@
 {
   "name": "rubick-native-addon",
-  "version": "0.0.5-beta",
+  "version": "0.0.0",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
@@ -24,7 +24,7 @@
     "artifacts": "napi artifacts",
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
-    "prepublishOnly": "napi prepublish -t npm",
+    "prepublishOnly": "node ./prepub.js && napi prepublish -t npm",
     "universal": "napi universal",
     "version": "napi version"
   },

@@ -216,7 +216,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish Addon
         run: |
-          # npm config set provenance true
+          npm config set provenance true
           pnpm publish --access public
       - name: Publish
         run: |
