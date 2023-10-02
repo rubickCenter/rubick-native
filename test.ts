@@ -1,14 +1,12 @@
-// import { onInputEvent } from "./src"
+import { grabInputEvent } from "./addon"
 
+grabInputEvent((event) => {
+    const e = JSON.parse(event)?.event_type
+    if (e?.ButtonRelease === "Right") {
+        return false
+    }
+    console.log(e);
+    return true
+})
 
-// onInputEvent((event) => {
-//     console.log(event);
-// })
-
-import * as addon from "./dist"
-
-console.log(addon);
-// for await (const i of shortcutWin()) {
-//     console.log(i);
-//     // sss++
-// }
+console.log(1);

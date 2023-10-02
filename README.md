@@ -41,12 +41,12 @@ pnpm add rubick-native
  {+CTRL}a{-CTRL}{+SHIFT}Hello World{-SHIFT}
 ```
 
-9. 监听输入事件
+9. onInputEvent: 键鼠事件监听
 
 ##### 入参 eg
 
 ```js
-(event: object) => console.log(event);
+(event: object) => void;
 ```
 
 - callback: function 监听输入事件的函数
@@ -60,6 +60,18 @@ pnpm add rubick-native
   "event_type": { "KeyPress": "KeyA" } // 事件类型
 }
 ```
+
+10. grapInputEvent 键鼠事件监听&拦截
+
+比 onInputEvent 多了拦截键鼠事件的功能，但是在 MacOS 下需要被授予 Accessibility 权限此 API 才能工作，故无拦截需求建议使用 onInputEvent
+
+##### 入参 eg
+
+```js
+(event: object) => boolean;
+```
+
+- callback: function 监听输入事件的函数, 返回是否将事件发送给系统
 
 ### 2. Clipboard ✅
 

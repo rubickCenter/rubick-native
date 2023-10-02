@@ -7,7 +7,7 @@ version = "0.0.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-rdev = { version = "0.5.3", features = ["serialize"] }
+rdev = { version = "0.5.3", features = ["serialize", "unstable_grab"] }
 clipboard-files = "0.1.1"
 copypasta = "0.8.2"
 enigo = "0.1.3"

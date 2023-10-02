@@ -9,6 +9,7 @@ export interface ClipBoardContentJson {
 }
 export function getClipboardContent(): ClipBoardContentJson | null
 export function onInputEvent(callback: (event: string) => void): void
+export function grabInputEvent(callback: (event: string) => boolean): void
 export function exeLookBase64(fileName: string): string | null
 export function parseLnk(path: string): string | null
 export function parseLnkFallback(path: string): LnkData
