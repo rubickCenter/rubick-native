@@ -120,16 +120,15 @@ export interface MouseKeyBoardEventOther {
         nanos_since_epoch: number
     },
     name: null,
-    event_type: {
-        "KeyRelease": EventKeyType
+    event: {
+        type: "KeyRelease" | "ButtonPress" | "ButtonRelease"
+        value: EventKeyType
     } | {
-        "ButtonPress": EventBtnType
+        type: "MouseMove"
+        value: { x: number, y: number }
     } | {
-        "ButtonRelease": EventBtnType
-    } | {
-        "MouseMove": { x: number, y: number }
-    } | {
-        "Wheel": { delta_x: number, delta_y: number }
+        type: "Wheel",
+        value: { delta_x: number, delta_y: number }
     }
 }
 
@@ -139,12 +138,21 @@ export interface MouseKeyBoardEventKeyPress {
         nanos_since_epoch: number
     },
     name: string,
-    event_type: {
-        "KeyPress": EventKeyType
+    event: {
+        type: "KeyPress"
+        value: EventKeyType
     }
 }
 
 export type MouseKeyBoardEvent = MouseKeyBoardEventOther | MouseKeyBoardEventKeyPress
-
-export const onInputEvent = (callback: (event: MouseKeyBoardEvent) => void) => oie((event) => callback(JSON.parse(event)))
-export const grabInputEvent = (callback: (event: MouseKeyBoardEvent) => boolean) => gie((event) => callback(JSON.parse(event)))
+const parse = (e: string) => {
+    const event = JSON.parse(e)
+    const [type, value] = Object.entries(event.event_type).pop()!
+    return {
+        time: event.time,
+        name: event.name,
+        event: { type, value }
+    } as MouseKeyBoardEvent
+}
+export const onInputEvent = (callback: (event: MouseKeyBoardEvent) => void) => oie((event) => callback(parse(event)))
+export const grabInputEvent = (callback: (event: MouseKeyBoardEvent) => boolean) => gie((event) => callback(parse(event)))

@@ -57,7 +57,10 @@ pnpm add rubick-native
 {
   "time": { "secs_since_epoch": 1695999163, "nanos_since_epoch": 631148700 }, // 触发时间
   "name": "a", // 输入内容
-  "event_type": { "KeyPress": "KeyA" } // 事件类型
+  "event": { 
+    "type":"KeyPress", // 事件类型
+    "value": "KeyA" // 事件值
+  } 
 }
 ```
 
