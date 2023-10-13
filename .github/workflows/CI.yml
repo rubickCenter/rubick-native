@@ -174,7 +174,7 @@ jobs:
               source $HOME/.cargo/env &&
               rustup target add aarch64-unknown-linux-gnu
           run: |
-              cd /addon &&
+              cd /addon/addon &&
               npm install &&
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build &&
               strip *.node
