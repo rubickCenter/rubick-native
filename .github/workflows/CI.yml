@@ -166,7 +166,7 @@ jobs:
             --volume "${PWD}:/addon"
           install: |
               set -e
-              apt-get update && apt-get install git
+              apt-get update && apt-get install git -y
               export NVM_DIR="$HOME/mynvm"
               git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
               pushd  "$NVM_DIR"
