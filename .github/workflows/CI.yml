@@ -166,6 +166,7 @@ jobs:
             --volume "${PWD}:/addon"
           install: |
               set -e &&
+              curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&
               apt-get update &&
               apt-get install nodejs npm libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
               curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
