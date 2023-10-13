@@ -166,14 +166,16 @@ jobs:
             --volume "${PWD}:/addon"
           install: |
               set -e &&
-              curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&
               apt-get update &&
-              apt-get install nodejs npm libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
+              apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
+              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash &&
+              nvm install --lts &&
               curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
               source $HOME/.cargo/env &&
               rustup target add aarch64-unknown-linux-gnu
           run: |
               cd /addon &&
+              nvm use --lts &&
               npm install &&
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build &&
               strip *.node
