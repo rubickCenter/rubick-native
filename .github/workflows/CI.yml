@@ -146,7 +146,7 @@ jobs:
           source $HOME/.cargo/env &&
           rustup target add ${{ matrix.settings.target }} &&
           npm install &&
-          PKG_CONFIG_SYSROOT_DIR=/ npm run build --target ${{ matrix.settings.target }} &&
+          PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=${{ matrix.settings.target }} npm run build &&
           strip ${{ matrix.settings.target }}/*.node
       - name: Upload artifact
         uses: actions/upload-artifact@v3
