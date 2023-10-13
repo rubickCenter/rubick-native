@@ -165,16 +165,11 @@ jobs:
           dockerRunArgs: |
             --volume "${PWD}:/addon"
           install: |
-              set -e
-              apt-get update && apt-get install git -y
-              export NVM_DIR="$HOME/mynvm"
-              git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
-              pushd  "$NVM_DIR"
-              git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
-              popd
-              chmod +x "$NVM_DIR/nvm.sh"
-              . "$NVM_DIR/nvm.sh" --no-use &&
+              set -e &&
+              curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash &&
+              source ~/.bashrc &&
               nvm install --lts &&
+              apt-get update &&
               apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
               curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
               source $HOME/.cargo/env &&
