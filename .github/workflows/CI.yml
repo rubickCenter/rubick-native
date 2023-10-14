@@ -123,6 +123,7 @@ jobs:
       - uses: jirutka/setup-alpine@v1
         with:
           arch: ${{ matrix.settings.arch }}
+          volumes: ~/.cargo:~/.cargo
       - name: Cache cargo
         uses: actions/cache@v3
         with:
