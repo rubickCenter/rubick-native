@@ -156,6 +156,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Cache cargo
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            addon/.cargo-cache
+            addon/target/
+          key: aarch64-unknown-linux-gnu-cargo-ubuntu-latest
       - uses: uraimo/run-on-arch-action@v2
         name: Build artifact
         with:
@@ -164,6 +174,7 @@ jobs:
           githubToken: ${{ github.token }}
           dockerRunArgs: |
             --volume "${PWD}:/addon"
+            --volume "~/:~/"
           run: |
               set -e &&
               apt-get update &&
