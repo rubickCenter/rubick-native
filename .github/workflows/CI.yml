@@ -174,7 +174,7 @@ jobs:
           githubToken: ${{ github.token }}
           dockerRunArgs: |
             --volume "${PWD}:/addon"
-            --volume "~/:~/"
+            --volume "~/.cargo:~/.cargo"
           run: |
               set -e &&
               apt-get update &&
