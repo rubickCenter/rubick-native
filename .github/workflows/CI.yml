@@ -123,6 +123,7 @@ jobs:
       - uses: jirutka/setup-alpine@v1
         with:
           arch: ${{ matrix.settings.arch }}
+          volumes: ~/.cargo:~/.cargo
       - name: Cache cargo
         uses: actions/cache@v3
         with:
@@ -156,6 +157,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Cache cargo
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            addon/.cargo-cache
+            addon/target/
+          key: aarch64-unknown-linux-gnu-cargo-ubuntu-latest
       - uses: uraimo/run-on-arch-action@v2
         name: Build artifact
         with:
@@ -164,7 +175,8 @@ jobs:
           githubToken: ${{ github.token }}
           dockerRunArgs: |
             --volume "${PWD}:/addon"
-          install: |
+            --volume "~/.cargo:/root/.cargo"
+          run: |
               set -e &&
               apt-get update &&
               apt-get install nodejs npm libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
@@ -172,8 +184,7 @@ jobs:
               n stable &&
               curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
               source $HOME/.cargo/env &&
-              rustup target add aarch64-unknown-linux-gnu
-          run: |
+              rustup target add aarch64-unknown-linux-gnu &&
               cd /addon/addon &&
               npm install &&
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build &&
