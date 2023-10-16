@@ -1,10 +1,10 @@
 const { readFileSync, writeFileSync } = require("fs")
+const path = require("path");
 const { version } = require("../package.json")
-const pkg = require(path.join(__dirname, "package.json"))
+const pkg = require("./package.json")
 pkg.version = version
 writeFileSync("./package.json", JSON.stringify(pkg))
 
-const path = require("path");
 const ijs_path = path.join(__dirname, "index.js")
 const ijs = readFileSync(ijs_path, "utf-8")
 const pkg_name = pkg.name
