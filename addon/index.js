@@ -29,36 +29,6 @@ function isMusl() {
 }
 
 switch (platform) {
-  case 'android':
-    switch (arch) {
-      case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'rubick-native-addon.android-arm64.node'))
-        try {
-          if (localFileExisted) {
-            nativeBinding = require('./rubick-native-addon.android-arm64.node')
-          } else {
-            nativeBinding = require('rubick-native-addon-android-arm64')
-          }
-        } catch (e) {
-          loadError = e
-        }
-        break
-      case 'arm':
-        localFileExisted = existsSync(join(__dirname, 'rubick-native-addon.android-arm-eabi.node'))
-        try {
-          if (localFileExisted) {
-            nativeBinding = require('./rubick-native-addon.android-arm-eabi.node')
-          } else {
-            nativeBinding = require('rubick-native-addon-android-arm-eabi')
-          }
-        } catch (e) {
-          loadError = e
-        }
-        break
-      default:
-        throw new Error(`Unsupported architecture on Android ${arch}`)
-    }
-    break
   case 'win32':
     switch (arch) {
       case 'x64':
@@ -116,7 +86,7 @@ switch (platform) {
         nativeBinding = require('rubick-native-addon-darwin-universal')
       }
       break
-    } catch {}
+    } catch { }
     switch (arch) {
       case 'x64':
         localFileExisted = existsSync(join(__dirname, 'rubick-native-addon.darwin-x64.node'))
@@ -146,21 +116,6 @@ switch (platform) {
         break
       default:
         throw new Error(`Unsupported architecture on macOS: ${arch}`)
-    }
-    break
-  case 'freebsd':
-    if (arch !== 'x64') {
-      throw new Error(`Unsupported architecture on FreeBSD: ${arch}`)
-    }
-    localFileExisted = existsSync(join(__dirname, 'rubick-native-addon.freebsd-x64.node'))
-    try {
-      if (localFileExisted) {
-        nativeBinding = require('./rubick-native-addon.freebsd-x64.node')
-      } else {
-        nativeBinding = require('rubick-native-addon-freebsd-x64')
-      }
-    } catch (e) {
-      loadError = e
     }
     break
   case 'linux':
@@ -221,20 +176,6 @@ switch (platform) {
           } catch (e) {
             loadError = e
           }
-        }
-        break
-      case 'arm':
-        localFileExisted = existsSync(
-          join(__dirname, 'rubick-native-addon.linux-arm-gnueabihf.node')
-        )
-        try {
-          if (localFileExisted) {
-            nativeBinding = require('./rubick-native-addon.linux-arm-gnueabihf.node')
-          } else {
-            nativeBinding = require('rubick-native-addon-linux-arm-gnueabihf')
-          }
-        } catch (e) {
-          loadError = e
         }
         break
       default:
