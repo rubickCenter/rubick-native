@@ -6,8 +6,7 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsup --cjsInterop",
-    "prepublishOnly": "node ./prepub.cjs"
+    "build": "tsup --cjsInterop"
   },
   "devDependencies": {
     "@types/node": "^20.8.6",
@@ -23,10 +22,7 @@
   "files": [
     "README.md",
     "LICENSE",
-    "dist/",
-    "addon/package.json",
-    "addon/index.js",
-    "addon/index.d.ts"
+    "dist/"
   ],
   "tsup": {
     "entry": [
