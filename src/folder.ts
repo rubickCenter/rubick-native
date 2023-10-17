@@ -1,5 +1,4 @@
 import { activeWindow } from "@miniben90/x-win"
-import { execa } from "execa"
 import { lstat } from "fs/promises"
 import { homedir } from "os"
 import { join } from "path"
@@ -7,7 +6,8 @@ import { join } from "path"
 // 获取活动的文件夹路径
 export const getFolderOpenPath = async () => {
     if (process.platform === 'darwin') {
-        const res = await execa('osascript', ['-e', `
+        const { execa } = await import("execa")
+        const res = execa('osascript', ['-e', `
 			tell app "Finder"
 				try
 					POSIX path of (insertion location as alias)
