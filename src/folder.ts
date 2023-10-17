@@ -1,9 +1,8 @@
 import { activeWindow } from "@miniben90/x-win"
-import EXECA from "execa";
+import { execa } from "execa";
 import { lstat } from "fs/promises"
 import { homedir } from "os"
 import { join } from "path"
-const { execa } = EXECA
 
 // 获取活动的文件夹路径
 export const getFolderOpenPath = async () => {
