@@ -1,6 +1,6 @@
 {
   "name": "rubick-native",
-  "version": "0.0.10",
+  "version": "0.0.11-beta",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
