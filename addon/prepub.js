@@ -14,7 +14,6 @@ const { join } = require('path')
 const { platform, arch } = process
 
 let nativeBinding = null
-let localFileExisted = false
 let loadError = null
 
 function isMusl() {
@@ -36,43 +35,22 @@ switch (platform) {
   case 'win32':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(
-          join(__dirname, '${pkg_name}.win32-x64-msvc.node')
-        )
         try {
-          if (localFileExisted) {
-            nativeBinding = require('./${pkg_name}.win32-x64-msvc.node')
-          } else {
-            nativeBinding = require('${pkg_name}-win32-x64-msvc')
-          }
+          nativeBinding = require('./${pkg_name}.win32-x64-msvc.node')
         } catch (e) {
           loadError = e
         }
         break
       case 'ia32':
-        localFileExisted = existsSync(
-          join(__dirname, '${pkg_name}.win32-ia32-msvc.node')
-        )
         try {
-          if (localFileExisted) {
-            nativeBinding = require('./${pkg_name}.win32-ia32-msvc.node')
-          } else {
-            nativeBinding = require('${pkg_name}-win32-ia32-msvc')
-          }
+          nativeBinding = require('./${pkg_name}.win32-ia32-msvc.node')
         } catch (e) {
           loadError = e
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, '${pkg_name}.win32-arm64-msvc.node')
-        )
         try {
-          if (localFileExisted) {
-            nativeBinding = require('./${pkg_name}.win32-arm64-msvc.node')
-          } else {
-            nativeBinding = require('${pkg_name}-win32-arm64-msvc')
-          }
+          nativeBinding = require('./${pkg_name}.win32-arm64-msvc.node')
         } catch (e) {
           loadError = e
         }
@@ -82,38 +60,21 @@ switch (platform) {
     }
     break
   case 'darwin':
-    localFileExisted = existsSync(join(__dirname, '${pkg_name}.darwin-universal.node'))
     try {
-      if (localFileExisted) {
-        nativeBinding = require('./${pkg_name}.darwin-universal.node')
-      } else {
-        nativeBinding = require('${pkg_name}-darwin-universal')
-      }
+      nativeBinding = require('./${pkg_name}.darwin-universal.node')
       break
     } catch { }
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(join(__dirname, '${pkg_name}.darwin-x64.node'))
         try {
-          if (localFileExisted) {
-            nativeBinding = require('./${pkg_name}.darwin-x64.node')
-          } else {
-            nativeBinding = require('${pkg_name}-darwin-x64')
-          }
+          nativeBinding = require('./${pkg_name}.darwin-x64.node')
         } catch (e) {
           loadError = e
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, '${pkg_name}.darwin-arm64.node')
-        )
         try {
-          if (localFileExisted) {
-            nativeBinding = require('./${pkg_name}.darwin-arm64.node')
-          } else {
-            nativeBinding = require('${pkg_name}-darwin-arm64')
-          }
+          nativeBinding = require('./${pkg_name}.darwin-arm64.node')
         } catch (e) {
           loadError = e
         }
@@ -126,28 +87,14 @@ switch (platform) {
     switch (arch) {
       case 'x64':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, '${pkg_name}.linux-x64-musl.node')
-          )
           try {
-            if (localFileExisted) {
-              nativeBinding = require('./${pkg_name}.linux-x64-musl.node')
-            } else {
-              nativeBinding = require('${pkg_name}-linux-x64-musl')
-            }
+            nativeBinding = require('./${pkg_name}.linux-x64-musl.node')
           } catch (e) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, '${pkg_name}.linux-x64-gnu.node')
-          )
           try {
-            if (localFileExisted) {
-              nativeBinding = require('./${pkg_name}.linux-x64-gnu.node')
-            } else {
-              nativeBinding = require('${pkg_name}-linux-x64-gnu')
-            }
+            nativeBinding = require('./${pkg_name}.linux-x64-gnu.node')
           } catch (e) {
             loadError = e
           }
@@ -155,28 +102,14 @@ switch (platform) {
         break
       case 'arm64':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, '${pkg_name}.linux-arm64-musl.node')
-          )
           try {
-            if (localFileExisted) {
-              nativeBinding = require('./${pkg_name}.linux-arm64-musl.node')
-            } else {
-              nativeBinding = require('${pkg_name}-linux-arm64-musl')
-            }
+            nativeBinding = require('./${pkg_name}.linux-arm64-musl.node')
           } catch (e) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, '${pkg_name}.linux-arm64-gnu.node')
-          )
           try {
-            if (localFileExisted) {
-              nativeBinding = require('./${pkg_name}.linux-arm64-gnu.node')
-            } else {
-              nativeBinding = require('${pkg_name}-linux-arm64-gnu')
-            }
+            nativeBinding = require('./${pkg_name}.linux-arm64-gnu.node')
           } catch (e) {
             loadError = e
           }
