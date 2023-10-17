@@ -1,7 +1,4 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node
-# Edit at https://www.toptal.com/developers/gitignore?templates=node
-/index.d.ts
-/index.js
 
 ### Node ###
 # Logs
