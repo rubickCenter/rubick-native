@@ -1,11 +1,10 @@
 use lnk_parser::LNKParser;
-use std::{fs::File, path::PathBuf};
+use std::path::PathBuf;
 pub mod exelook;
 
 #[napi]
 pub fn parse_lnk(path: String) -> Option<String> {
-  let mut file = File::open(path).unwrap();
-  let lnk_file = LNKParser::from_reader(&mut file);
+  let lnk_file = LNKParser::from_path(&path);
   if let Ok(f) = lnk_file {
     Some(serde_json::to_string(&f).unwrap())
   } else {

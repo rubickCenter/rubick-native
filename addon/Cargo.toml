@@ -11,13 +11,14 @@ rdev = { version = "0.5.3", features = ["serialize", "unstable_grab"] }
 clipboard-files = "0.1.1"
 copypasta = "0.10.0"
 enigo = "0.1.3"
-napi = { version = "2.13.3", default-features = false, features = ["napi4"] }
+napi = { version = "2", features = ["async"] }
 napi-derive = "2.13.0"
 serde_json = "1.0.107"
 lnk_parser = "0.4.0"
 parselnk = "0.1.1"
 pelite = "0.10.0"
 base64 = "0.21.4"
+tokio = { version = "1", features = ["full"] }
 
 [build-dependencies]
 napi-build = "2.0.1"

@@ -1,6 +1,6 @@
 {
   "name": "rubick-native",
-  "version": "0.0.12",
+  "version": "0.0.13-beta",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -9,9 +9,9 @@
     "build": "tsup --cjsInterop"
   },
   "devDependencies": {
-    "@types/node": "^20.8.6",
-    "tsup": "^7.2.0",
+    "@types/node": "^20.8.7",
     "picomatch": "^2.3.1",
+    "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
