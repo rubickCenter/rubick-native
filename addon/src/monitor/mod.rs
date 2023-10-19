@@ -1,7 +1,7 @@
 use napi::{
   bindgen_prelude::*,
   threadsafe_function::{ErrorStrategy, ThreadsafeFunction, ThreadsafeFunctionCallMode},
-  JsBoolean,
+  JsBoolean, Result,
 };
 use rdev::{grab, listen, Event};
 use std::{
@@ -10,10 +10,9 @@ use std::{
 };
 
 #[napi(ts_args_type = "callback: (event: string) => void")]
-pub fn on_input_event(callback: JsFunction) {
-  let jsfn: ThreadsafeFunction<String, ErrorStrategy::Fatal> = callback
-    .create_threadsafe_function(0, |ctx| Ok(vec![ctx.value]))
-    .unwrap();
+pub fn on_input_event(callback: JsFunction) -> Result<()> {
+  let jsfn: ThreadsafeFunction<String, ErrorStrategy::Fatal> =
+    callback.create_threadsafe_function(0, |ctx| Ok(vec![ctx.value]))?;
 
   spawn(|| {
     if let Err(error) = listen(move |event| {
@@ -25,13 +24,13 @@ pub fn on_input_event(callback: JsFunction) {
       println!("Error: {:?}", error)
     }
   });
+  Ok(())
 }
 
 #[napi(ts_args_type = "callback: (event: string) => boolean")]
-pub fn grab_input_event(callback: JsFunction) {
-  let jsfn: ThreadsafeFunction<String, ErrorStrategy::Fatal> = callback
-    .create_threadsafe_function(0, |ctx| Ok(vec![ctx.value]))
-    .unwrap();
+pub fn grab_input_event(callback: JsFunction) -> Result<()> {
+  let jsfn: ThreadsafeFunction<String, ErrorStrategy::Fatal> =
+    callback.create_threadsafe_function(0, |ctx| Ok(vec![ctx.value]))?;
 
   let gcallback = move |event: Event| -> Option<Event> {
     let (s, r): (Sender<bool>, mpsc::Receiver<bool>) = mpsc::channel::<bool>();
@@ -62,4 +61,5 @@ pub fn grab_input_event(callback: JsFunction) {
       println!("GrabError: {:?}", error)
     }
   });
+  Ok(())
 }

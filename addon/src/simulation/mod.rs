@@ -1,10 +1,15 @@
 use enigo::{Enigo, KeyboardControllable, MouseButton, MouseControllable};
 use napi::bindgen_prelude::*;
+use napi::Result;
 
 #[napi]
-pub fn send_keyboard_simulation(cmd: String) {
+pub fn send_keyboard_simulation(cmd: String) -> Result<()> {
   let mut enigo = Enigo::new();
-  enigo.key_sequence_parse(&cmd);
+  if let Err(e) = enigo.key_sequence_parse_try(&cmd) {
+    Err(napi::Error::from_reason(e.to_string()))
+  } else {
+    Ok(())
+  }
 }
 
 #[napi]

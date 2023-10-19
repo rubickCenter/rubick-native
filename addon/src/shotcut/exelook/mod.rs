@@ -188,10 +188,10 @@ fn _exelook(file_name: String) -> Result<ShorCutImg> {
 }
 
 #[napi]
-pub fn exe_look_base64(file_name: String) -> Option<String> {
-  if let Ok(l) = _exelook(file_name) {
-    Some("data:image/*;base64,".to_owned() + &general_purpose::STANDARD.encode(l.data))
-  } else {
-    None
+pub fn exe_look_base64(file_name: String) -> napi::Result<String> {
+  let look = _exelook(file_name);
+  match look {
+    Ok(l) => Ok("data:image/*;base64,".to_owned() + &general_purpose::STANDARD.encode(l.data)),
+    Err(e) => Err(napi::Error::from_reason(format!("{:?}", e))),
   }
 }

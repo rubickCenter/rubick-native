@@ -27,7 +27,7 @@ export const getSystemApp = (extraPath?: string[]) => {
     }
 }
 
-export const getAppIcon = (path: string): string | null => {
+export const getAppIcon = (path: string): string => {
     switch (platform()) {
         case "win32":
             return exeLookBase64(path)

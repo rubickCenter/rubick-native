@@ -18,10 +18,9 @@ export const shortcutWin = (extraPath: string[] = []) => ({
         for (const p of defaultPaths) {
             const o = await f.crawl(p).withPromise()
             for (const t of o) {
-                const data = parseLnk(t)
                 const { name, dir } = parse(t)
-
-                if (data) {
+                try {
+                    const data = parseLnk(t)
                     const d = JSON.parse(data)
                     yield ({
                         name,
@@ -30,10 +29,9 @@ export const shortcutWin = (extraPath: string[] = []) => ({
                         shortCutPath: t,
                         workingDir: d.working_dir ?? null,
                     }) as Apps
-                } else {
+                } catch {
                     const d = parseLnkFallback(t)
                     const execPath = join(dir, d.relativePath ?? '')
-
                     yield ({
                         name,
                         description: d.nameString ?? null,

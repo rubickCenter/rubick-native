@@ -1,14 +1,14 @@
 use lnk_parser::LNKParser;
+use napi::Result;
 use std::path::PathBuf;
 pub mod exelook;
 
 #[napi]
-pub fn parse_lnk(path: String) -> Option<String> {
+pub fn parse_lnk(path: String) -> Result<String> {
   let lnk_file = LNKParser::from_path(&path);
-  if let Ok(f) = lnk_file {
-    Some(serde_json::to_string(&f).unwrap())
-  } else {
-    None
+  match lnk_file {
+    Ok(f) => Ok(serde_json::to_string(&f).unwrap()),
+    Err(e) => Err(napi::Error::from_reason(e.to_string())),
   }
 }
 
@@ -28,14 +28,16 @@ fn convert(p: Option<PathBuf>) -> Option<String> {
 }
 
 #[napi]
-pub fn parse_lnk_fallback(path: String) -> LnkData {
+pub fn parse_lnk_fallback(path: String) -> Result<LnkData> {
   let lnk_path = std::path::Path::new(&path);
-  let lnk = parselnk::Lnk::try_from(lnk_path).unwrap();
-
-  LnkData {
-    name_string: lnk.string_data.name_string,
-    relative_path: convert(lnk.string_data.relative_path),
-    working_dir: convert(lnk.string_data.working_dir),
-    icon_location: convert(lnk.string_data.icon_location),
+  let lnk = parselnk::Lnk::try_from(lnk_path);
+  match lnk {
+    Ok(l) => Ok(LnkData {
+      name_string: l.string_data.name_string,
+      relative_path: convert(l.string_data.relative_path),
+      working_dir: convert(l.string_data.working_dir),
+      icon_location: convert(l.string_data.icon_location),
+    }),
+    Err(e) => Err(napi::Error::from_reason(e.to_string())),
   }
 }
