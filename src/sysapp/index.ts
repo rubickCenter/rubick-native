@@ -2,9 +2,9 @@ import { shortcutWin } from "./windows"
 import { platform } from "os"
 import { exeLookBase64 } from "../../addon"
 
-export type CallBack = (apps: Apps) => void | Promise<void>
+export type CallBack = (app: App) => void | Promise<void>
 
-export interface Apps {
+export interface App {
     name: string;
     description: string;
     execPath: string;
