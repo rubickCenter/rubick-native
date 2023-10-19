@@ -1,6 +1,5 @@
 use clipboard_files;
 use copypasta::{ClipboardContext, ClipboardProvider};
-use napi::Result;
 
 // use std::{
 //   path::PathBuf,
@@ -94,25 +93,25 @@ pub struct ClipBoardContentJson {
 
 // 获取剪切板文件或者文本
 #[napi]
-pub fn get_clipboard_content() -> Result<Option<ClipBoardContentJson>> {
+pub fn get_clipboard_content() -> Option<ClipBoardContentJson> {
   let files = clipboard_files::read();
   let mut ctx = ClipboardContext::new().unwrap();
   match files {
-    Ok(f) => Ok(Some(ClipBoardContentJson {
+    Ok(f) => Some(ClipBoardContentJson {
       r#type: "file".to_string(),
       content: f
         .into_iter()
         .map(|c| c.to_str().unwrap().to_string())
         .collect::<Vec<String>>(),
-    })),
+    }),
     Err(_) => {
       let content = ctx.get_contents();
       match content {
-        Ok(text) => Ok(Some(ClipBoardContentJson {
+        Ok(text) => Some(ClipBoardContentJson {
           r#type: "text".to_string(),
           content: vec![text],
-        })),
-        Err(_) => Ok(None),
+        }),
+        Err(_) => None,
       }
     }
   }
