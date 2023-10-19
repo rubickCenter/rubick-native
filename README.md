@@ -113,22 +113,10 @@ pnpm add rubick-native
 
 ##### 入参 eg
 
+- callback: (apps: Apps) => void | Promise<void> 用于接收应用信息的回调函数
 - extraPath: string 额外需要检索的文件夹
 
-##### 出参 eg
-
-异步迭代器
-
-```js
-let appNum = 0;
-for await (const app of getSystemApp()) {
-  console.log(app);
-  appNum++;
-}
-console.log("Total", appNum, "App installed.");
-```
-
-app object:
+Apps object:
 
 ```json
 {

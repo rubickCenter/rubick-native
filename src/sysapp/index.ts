@@ -2,6 +2,8 @@ import { shortcutWin } from "./windows"
 import { platform } from "os"
 import { exeLookBase64 } from "../../addon"
 
+export type CallBack = (apps: Apps) => void | Promise<void>
+
 export interface Apps {
     name: string;
     description: string;
@@ -11,10 +13,10 @@ export interface Apps {
 }
 
 // todo linux/macos
-export const getSystemApp = (extraPath?: string[]) => {
+export const getSystemApp = async (callback: CallBack, extraPath?: string[]) => {
     switch (platform()) {
         case "win32":
-            return shortcutWin(extraPath)
+            return await shortcutWin(callback, extraPath)
 
         // case "linux":
         //     break;
