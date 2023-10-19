@@ -7,7 +7,7 @@ import { join } from "path"
 export const getFolderOpenPath = async () => {
     if (process.platform === 'darwin') {
         const { execa } = await import("execa")
-        const res = execa('osascript', ['-e', `
+        const res = await execa('osascript', ['-e', `
 			tell app "Finder"
 				try
 					POSIX path of (insertion location as alias)
