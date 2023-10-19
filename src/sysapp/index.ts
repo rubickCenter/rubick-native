@@ -1,10 +1,11 @@
 import { shortcutWin } from "./windows"
 import { platform } from "os"
 import { exeLookBase64 } from "../../addon"
+import { ParsedPath } from "path";
 
 export type CallBack = (app: App) => void | Promise<void>
 
-export interface App {
+export interface App extends ParsedPath {
     name: string;
     description: string;
     execPath: string;

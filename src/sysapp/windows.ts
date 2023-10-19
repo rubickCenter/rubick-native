@@ -8,10 +8,9 @@ export const shortcutWin = async (callback: CallBack, extraPath: string[] = []) 
     const hdir = homedir()
     const f = new fdir().glob("./**/*.lnk").withFullPaths()
         .filter((t) => {
-            const { name } = parse(t)
             const d = parseLnk(t)
             callback({
-                name,
+                ...parse(t),
                 description: d.nameString,
                 execPath: d.fullPath,
                 shortCutPath: t,
