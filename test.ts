@@ -1,8 +1,10 @@
+import { existsSync } from "fs";
 import { getSystemApp } from "./src"
 
 console.time("1")
-getSystemApp((e) => {
-    console.log(e);
-
+await getSystemApp((e) => {
+    if (!existsSync(e.execPath)) {
+        console.log(e);
+    }
 })
 console.timeEnd("1")

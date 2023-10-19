@@ -11,8 +11,7 @@ export function getClipboardContent(): ClipBoardContentJson | null
 export function onInputEvent(callback: (event: string) => void): void
 export function grabInputEvent(callback: (event: string) => boolean): void
 export function exeLookBase64(fileName: string): string
-export function parseLnk(path: string): string
-export function parseLnkFallback(path: string): LnkData
+export function parseLnk(path: string): LnkData
 export function sendKeyboardSimulation(cmd: string): void
 export const enum MouseBtn {
   Left = 0,
@@ -48,7 +47,7 @@ export class ShorCutImg {
 }
 export class LnkData {
   nameString?: string
-  relativePath?: string
+  fullPath?: string
   workingDir?: string
   iconLocation?: string
 }

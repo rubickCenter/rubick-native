@@ -252,7 +252,7 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { getClipboardContent, onInputEvent, grabInputEvent, ShorCutImg, exeLookBase64, parseLnk, LnkData, parseLnkFallback, sendKeyboardSimulation, MouseBtn, MouseAction, sendMouseSimulation } = nativeBinding
+const { getClipboardContent, onInputEvent, grabInputEvent, ShorCutImg, exeLookBase64, parseLnk, LnkData, sendKeyboardSimulation, MouseBtn, MouseAction, sendMouseSimulation } = nativeBinding
 
 module.exports.getClipboardContent = getClipboardContent
 module.exports.onInputEvent = onInputEvent
@@ -261,7 +261,6 @@ module.exports.ShorCutImg = ShorCutImg
 module.exports.exeLookBase64 = exeLookBase64
 module.exports.parseLnk = parseLnk
 module.exports.LnkData = LnkData
-module.exports.parseLnkFallback = parseLnkFallback
 module.exports.sendKeyboardSimulation = sendKeyboardSimulation
 module.exports.MouseBtn = MouseBtn
 module.exports.MouseAction = MouseAction
