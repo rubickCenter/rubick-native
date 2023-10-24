@@ -2,7 +2,7 @@ import { getClipboardContent as gcbc } from "../addon"
 
 interface ClipboardContentText {
     type: "text",
-    content: string
+    content: string | undefined
 }
 
 interface ClipboardContentFile {

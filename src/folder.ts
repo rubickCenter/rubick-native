@@ -6,7 +6,7 @@ import { join } from "path"
 // 获取活动的文件夹路径
 export const getFolderOpenPath = async () => {
     if (process.platform === 'darwin') {
-        const { execa } = await import("execa")
+        const { execa } = require("execa")
         const res = await execa('osascript', ['-e', `
 			tell app "Finder"
 				try
