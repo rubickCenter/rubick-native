@@ -13,6 +13,7 @@ writeFileSync(ijs_path, newijs);
     "entry": [
         "lib/index.ts"
     ],
+    "cjsInterop": true,
     "format": [
         "cjs",
         "esm"
