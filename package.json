@@ -27,6 +27,7 @@
         "build:debug": "napi build --platform",
         "prepublishOnly": "napi prepublish -t npm",
         "universal": "napi universal",
+        "test": "echo",
         "version": "napi version"
     },
     "devDependencies": {
