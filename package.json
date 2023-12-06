@@ -23,7 +23,7 @@
     },
     "scripts": {
         "artifacts": "napi artifacts",
-        "build": "napi build --platform --release && node ./postbuild.js && tsup --cjsInterop",
+        "build": "napi build --platform --release && node ./postbuild.js",
         "build:debug": "napi build --platform",
         "prepublishOnly": "napi prepublish -t npm",
         "universal": "napi universal",
@@ -46,18 +46,5 @@
         "README.md",
         "LICENSE",
         "dist/"
-    ],
-    "tsup": {
-        "entry": [
-            "lib/index.ts"
-        ],
-        "format": [
-            "cjs",
-            "esm"
-        ],
-        "clean": true,
-        "dts": true,
-        "treeshake": true,
-        "shims": true
-    }
+    ]
 }

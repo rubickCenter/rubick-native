@@ -7,4 +7,18 @@ const twoijs = ijs.split('binding\`)\n}\n')
 
 const newijs = 'const { join } = require("path")\nconst nativeBinding = (new Function(`require`,`__dirname`,`' + twoijs[0].replaceAll('`', '\\`').replaceAll('$', '\\$') + 'binding\\`)\n}\nreturn nativeBinding`))((path)=>require(path.replace("./","../")),join(__dirname,".."))\n' + twoijs[1]
 
-writeFileSync(ijs_path, newijs)
+writeFileSync(ijs_path, newijs);
+
+(async () => await require("tsup").build({
+    "entry": [
+        "lib/index.ts"
+    ],
+    "format": [
+        "cjs",
+        "esm"
+    ],
+    "clean": true,
+    "dts": true,
+    "treeshake": true,
+    "shims": true
+}))()
