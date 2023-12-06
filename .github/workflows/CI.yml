@@ -155,50 +155,50 @@ jobs:
   #         path: addon/${{ env.APP_NAME }}.*.node
   #         if-no-files-found: error
   # build-arm-gnu:
-    name: aarch64-unknown-linux-gnu
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Cache cargo
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            addon/.cargo-cache
-            addon/target/
-          key: aarch64-unknown-linux-gnu-cargo-ubuntu-latest
-      - uses: uraimo/run-on-arch-action@v2
-        name: Build artifact
-        with:
-          arch: aarch64
-          distro: ubuntu_latest
-          githubToken: ${{ github.token }}
-          dockerRunArgs: |
-            --volume "${PWD}:/addon"
-            --volume "~/.cargo:/root/.cargo"
-          run: |
-              set -e &&
-              apt-get update &&
-              apt-get install nodejs npm libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
-              npm install n -g &&
-              n stable &&
-              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
-              source $HOME/.cargo/env &&
-              rustup install nightly &&
-              rustup default nightly &&
-              rustup target add aarch64-unknown-linux-gnu &&
-              cd /addon/addon &&
-              npm install &&
-              PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build &&
-              strip *.node
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: bindings-aarch64-unknown-linux-gnu
-          path: addon/${{ env.APP_NAME }}.*.node
-          if-no-files-found: error
+    # name: aarch64-unknown-linux-gnu
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - uses: actions/checkout@v3
+    #   - name: Cache cargo
+    #     uses: actions/cache@v3
+    #     with:
+    #       path: |
+    #         ~/.cargo/registry/index/
+    #         ~/.cargo/registry/cache/
+    #         ~/.cargo/git/db/
+    #         addon/.cargo-cache
+    #         addon/target/
+    #       key: aarch64-unknown-linux-gnu-cargo-ubuntu-latest
+    #   - uses: uraimo/run-on-arch-action@v2
+    #     name: Build artifact
+    #     with:
+    #       arch: aarch64
+    #       distro: ubuntu_latest
+    #       githubToken: ${{ github.token }}
+    #       dockerRunArgs: |
+    #         --volume "${PWD}:/addon"
+    #         --volume "~/.cargo:/root/.cargo"
+    #       run: |
+    #           set -e &&
+    #           apt-get update &&
+    #           apt-get install nodejs npm libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
+    #           npm install n -g &&
+    #           n stable &&
+    #           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y &&
+    #           source $HOME/.cargo/env &&
+    #           rustup install nightly &&
+    #           rustup default nightly &&
+    #           rustup target add aarch64-unknown-linux-gnu &&
+    #           cd /addon/addon &&
+    #           npm install &&
+    #           PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build &&
+    #           strip *.node
+    #   - name: Upload artifact
+    #     uses: actions/upload-artifact@v3
+    #     with:
+    #       name: bindings-aarch64-unknown-linux-gnu
+    #       path: addon/${{ env.APP_NAME }}.*.node
+    #       if-no-files-found: error
   universal-macOS:
     name: Build universal macOS binary
     needs:
