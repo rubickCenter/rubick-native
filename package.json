@@ -1,12 +1,13 @@
 {
   "name": "rubick-native",
-  "version": "0.0.16-beta",
+  "version": "0.0.16",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "cd addon && npm run build && cd .. && tsup --cjsInterop"
+    "build": "cd addon && npm run build && cd .. && tsup --cjsInterop",
+    "prepublishOnly": "node ./prepub.js"
   },
   "devDependencies": {
     "@types/node": "^20.10.3",
