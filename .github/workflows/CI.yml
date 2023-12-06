@@ -56,7 +56,7 @@ jobs:
             build: |-
               set -e &&
               apk update &&
-              apk add curl git gcc g++ make cmake gfortran libffi-dev openssl-dev autoconf automake libtool libuuid libevdev-dev xdo xdotool-dev libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev &&
+              apk add git gfortran libffi-dev openssl-dev autoconf automake libtool libuuid libevdev-dev xdo xdotool-dev libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev &&
               PKG_CONFIG_SYSROOT_DIR=/ yarn build &&
               strip *.node
           - host: macos-latest
@@ -84,7 +84,7 @@ jobs:
             build: |-
               set -e &&
               apk update &&
-              apk add curl git gfortran libffi-dev openssl-dev autoconf automake libtool libuuid libevdev-dev xdo xdotool-dev libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev &&
+              apk add git gfortran libffi-dev openssl-dev autoconf automake libtool libuuid libevdev-dev xdo xdotool-dev libc-dev pkgconfig glib-dev gtk+3.0-dev pango-dev cairo-dev fontconfig-dev &&
               rustup target add aarch64-unknown-linux-musl &&
               PKG_CONFIG_SYSROOT_DIR=/ yarn build --target aarch64-unknown-linux-musl &&
               /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node
