@@ -12,9 +12,8 @@ npm install rubick-native
 ## 贡献
 
 1. Fork & Clone 本项目
-2. 贡献 Rust 部分: 进入 addon 文件下, 基于 [napi](https://napi.rs/) 教程进行开发; 使用 `yarn build` 命令打包生成 npm 包
-3. 贡献 JavaScript 部分: 在根目录下进行开发, 通过 `import { func } from "../addon"` 调用 Rust 函数
-4. 提起 PR
+2. 通过 `import { func } from "addon"` 调用 Rust 函数
+3. 提起 PR
 
 ## API
 
