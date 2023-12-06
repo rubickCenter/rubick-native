@@ -45,9 +45,9 @@ jobs:
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
             build: |-
+              set -e &&
               sudo apt-get update &&
               sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
-              set -e &&
               PKG_CONFIG_SYSROOT_DIR=/ yarn build --target x86_64-unknown-linux-gnu &&
               strip *.node
           - host: ubuntu-latest
@@ -73,9 +73,9 @@ jobs:
             target: aarch64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
             build: |-
+              set -e &&
               sudo apt-get update &&
               sudo apt-get install libxdo-dev uuid-dev libc-dev pkg-config libglib2.0-dev libgtk-3-dev libgtk2.0-dev libpango1.0-dev libcairo2-dev libfontconfig1-dev -y &&
-              set -e &&
               PKG_CONFIG_SYSROOT_DIR=/ yarn build --target aarch64-unknown-linux-gnu &&
               aarch64-unknown-linux-gnu-strip *.node
           - host: ubuntu-latest
