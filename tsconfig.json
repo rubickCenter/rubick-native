@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "outDir": "dist",
         "esModuleInterop": true,
         "module": "ESNext",
         "moduleResolution": "Node",
@@ -8,9 +7,12 @@
         "lib": [
             "ESNext",
             "DOM"
-        ]
-    },
-    "include": [
-        "./src/**/*"
-    ]
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "addon": [
+                "./index"
+            ]
+        }
+    }
 }
