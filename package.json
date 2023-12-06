@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsup --cjsInterop"
+    "build": "cd addon && npm run build && cd .. && tsup --cjsInterop"
   },
   "devDependencies": {
     "@types/node": "^20.10.3",
@@ -17,8 +17,7 @@
   "dependencies": {
     "@miniben90/x-win": "^1.3.1",
     "execa": "^8.0.1",
-    "fdir": "^6.1.1",
-    "rubick-native-addon": "./addon"
+    "fdir": "^6.1.1"
   },
   "files": [
     "README.md",
