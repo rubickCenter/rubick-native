@@ -136,7 +136,7 @@ jobs:
           architecture: x86
       - name: Install dependencies x86win
         if: matrix.settings.target == 'i686-pc-windows-msvc'
-        run: yarn install @rollup/rollup-win32-ia32-msvc
+        run: yarn add @rollup/rollup-win32-ia32-msvc
       - name: Build in docker
         uses: addnab/docker-run-action@v3
         if: ${{ matrix.settings.docker }}
