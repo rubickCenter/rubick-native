@@ -1,5 +1,4 @@
 use enigo::{Enigo, KeyboardControllable, MouseButton, MouseControllable};
-use napi::bindgen_prelude::*;
 use napi::Result;
 
 #[napi]

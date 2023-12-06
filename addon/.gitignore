@@ -1,4 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node
+index.d.ts
+index.js
 
 ### Node ###
 # Logs
