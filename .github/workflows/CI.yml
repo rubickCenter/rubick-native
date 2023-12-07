@@ -227,6 +227,7 @@ jobs:
           dockerRunArgs: |
             --volume "${PWD}:/addon"
             --volume "~/.cargo:/root/.cargo"
+          shell: /bin/sh
           setup: |
             source $HOME/.cargo/env
           install: ${{ matrix.settings.install }}
