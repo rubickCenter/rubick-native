@@ -191,7 +191,6 @@ jobs:
               rustup default nightly
               rustup target add aarch64-unknown-linux-musl
             build: |-
-              source $HOME/.cargo/env
               cd /addon
               npm install
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-musl npm run build
@@ -209,7 +208,6 @@ jobs:
               rustup default nightly
               rustup target add aarch64-unknown-linux-gnu
             build: |-
-              source $HOME/.cargo/env
               cd /addon
               npm install
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build
@@ -236,7 +234,9 @@ jobs:
           githubToken: ${{ github.token }}
           dockerRunArgs: |
             --volume "${PWD}:/addon"
-            --volume "~/.cargo:/root/.cargo"            
+            --volume "~/.cargo:/root/.cargo"          
+          setup: |
+            source $HOME/.cargo/env
           install: ${{ matrix.settings.install }}
           run: ${{ matrix.settings.build }}
       - name: Upload artifact
