@@ -286,12 +286,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: bindings-x86_64-apple-darwin
-          path: artifacts
+          path: .
       - name: Download macOS arm64 artifact
         uses: actions/download-artifact@v3
         with:
           name: bindings-aarch64-apple-darwin
-          path: artifacts
+          path: .
       - name: Combine binaries
         run: pnpm universal
       - name: Upload artifact
