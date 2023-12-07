@@ -190,8 +190,6 @@ jobs:
               rustup install nightly
               rustup default nightly
               rustup target add aarch64-unknown-linux-musl
-              npm install n -g
-              n stable
             build: |-
               source $HOME/.cargo/env
               cd /addon
