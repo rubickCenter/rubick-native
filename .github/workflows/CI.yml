@@ -167,6 +167,7 @@ jobs:
             .cargo-cache
             target/
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
+      - uses: goto-bus-stop/setup-zig@v2
       - name: Install dependencies
         run: pnpm install
       - name: Build
@@ -286,12 +287,15 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: bindings-x86_64-apple-darwin
-          path: .
+          path: artifacts
       - name: Download macOS arm64 artifact
         uses: actions/download-artifact@v3
         with:
           name: bindings-aarch64-apple-darwin
-          path: .
+          path: artifacts
+      - name: List packages
+        run: ls -R ./
+        shell: bash
       - name: Combine binaries
         run: pnpm universal
       - name: Upload artifact
