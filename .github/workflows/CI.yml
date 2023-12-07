@@ -237,8 +237,6 @@ jobs:
           dockerRunArgs: |
             --volume "${PWD}:/addon"
             --volume "~/.cargo:/root/.cargo"
-            --volume "target/:/addon/target"
-            --volume ".cargo-cache:/addon/.cargo-cache"
           shell: /bin/sh
           setup: |
             source $HOME/.cargo/env
