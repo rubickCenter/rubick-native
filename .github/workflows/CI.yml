@@ -189,6 +189,7 @@ jobs:
               rustup default nightly
               rustup target add aarch64-unknown-linux-musl
             build: |-
+              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y
               cargo
               cd /addon
               npm install
@@ -207,6 +208,7 @@ jobs:
               npm install n -g
               n stable
             build: |-
+              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y
               cargo
               cd /addon
               npm install
@@ -236,8 +238,6 @@ jobs:
             --volume "${PWD}:/addon"
             --volume "~/.cargo:/root/.cargo"          
           install: ${{ matrix.settings.install }}
-          env: |
-            cargo: /root/.cargo/bin/cargo
           run: ${{ matrix.settings.build }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
