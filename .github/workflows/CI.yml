@@ -189,6 +189,7 @@ jobs:
               rustup default nightly
               rustup target add aarch64-unknown-linux-musl
             build: |-
+              cd /addon
               npm install
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-musl npm run build
               strip *.node
@@ -205,6 +206,7 @@ jobs:
               npm install n -g
               n stable
             build: |-
+              cd /addon
               npm install
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build
               strip *.node
@@ -233,7 +235,6 @@ jobs:
             --volume "~/.cargo:/root/.cargo"          
           setup: |
             export PATH="$HOME/.cargo/bin:$PATH"
-            cd /addon
           install: ${{ matrix.settings.install }}
           run: ${{ matrix.settings.build }}
       - name: Upload artifact
