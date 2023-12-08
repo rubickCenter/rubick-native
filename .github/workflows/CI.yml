@@ -190,7 +190,6 @@ jobs:
               rustup target add aarch64-unknown-linux-musl
             build: |-
               source "$HOME/.cargo/env"
-              cargo
               cd /addon
               npm install
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-musl npm run build
@@ -209,7 +208,6 @@ jobs:
               n stable
             build: |-
               source "$HOME/.cargo/env"
-              cargo
               cd /addon
               npm install
               PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build
