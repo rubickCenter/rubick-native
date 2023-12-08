@@ -237,7 +237,7 @@ jobs:
             --volume "~/.cargo:/root/.cargo"          
           install: ${{ matrix.settings.install }}
           env: |
-            PATH="$HOME/.cargo/bin:$PATH"
+            PATH: "$HOME/.cargo/bin:$PATH"
           run: ${{ matrix.settings.build }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
