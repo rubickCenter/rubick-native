@@ -189,7 +189,7 @@ jobs:
               rustup default nightly
               rustup target add aarch64-unknown-linux-musl
             build: |-
-              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y
+              source "$HOME/.cargo/env"
               cargo
               cd /addon
               npm install
@@ -208,7 +208,7 @@ jobs:
               npm install n -g
               n stable
             build: |-
-              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y
+              source "$HOME/.cargo/env"
               cargo
               cd /addon
               npm install
