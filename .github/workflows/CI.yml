@@ -222,9 +222,6 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
             .cargo-cache
             target/
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.distro }}
@@ -235,8 +232,7 @@ jobs:
           distro: ${{ matrix.settings.distro }}_latest
           githubToken: ${{ github.token }}
           dockerRunArgs: |
-            --volume "${PWD}:/addon"
-            --volume "~/.cargo:/root/.cargo"          
+            --volume "${PWD}:/addon"    
           install: ${{ matrix.settings.install }}
           run: ${{ matrix.settings.build }}
       - name: Upload artifact
