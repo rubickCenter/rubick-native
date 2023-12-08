@@ -189,10 +189,9 @@ jobs:
               rustup default nightly
               rustup target add aarch64-unknown-linux-musl
             build: |-
-              export PATH="$HOME/.cargo/bin:$PATH"
               cd /addon
               npm install
-              PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-musl npm run build
+              PATH="$HOME/.cargo/bin:$PATH" PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-musl npm run build
               strip *.node
           - distro: ubuntu
             target: aarch64-unknown-linux-gnu
@@ -207,10 +206,9 @@ jobs:
               npm install n -g
               n stable
             build: |-
-              export PATH="$HOME/.cargo/bin:$PATH"
               cd /addon
               npm install
-              PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build
+              PATH="$HOME/.cargo/bin:$PATH" PKG_CONFIG_SYSROOT_DIR=/ CARGO_BUILD_TARGET=aarch64-unknown-linux-gnu npm run build
               strip *.node
     name: ${{ matrix.settings.target }}
     runs-on: ubuntu-latest
