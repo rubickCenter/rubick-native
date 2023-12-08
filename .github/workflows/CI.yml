@@ -232,7 +232,7 @@ jobs:
             --volume "${PWD}:/addon"
             --volume "~/.cargo:/root/.cargo"          
           setup: |
-            source /root/.cargo/env
+            sh /root/.cargo/env
             cd /addon
           install: ${{ matrix.settings.install }}
           run: ${{ matrix.settings.build }}
